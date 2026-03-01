@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест на системность бизнеса — Колесо Баланса | Business Commandos</title>
+  <meta name="description" content="Пройдите бесплатный тест из 32 вопросов и получите персональное Колесо Баланса Бизнеса. Узнайте, что тормозит рост вашей компании. Занимает 3 минуты.">
+  <meta property="og:title" content="Узнайте, что тормозит ваш бизнес — за 3 минуты">
+  <meta property="og:description" content="Бесплатный тест на системность для собственников бизнеса. 32 вопроса, 8 зон, персональный отчёт. Более 1200 предпринимателей уже прошли.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Перейти к содержимому</a>
+
+  <!-- ===================== SCREEN 1: LANDING ===================== -->
+  <section id="screen-landing" class="screen screen--active" aria-label="Главная страница теста">
+    <header class="landing-header">
+      <div class="container landing-header__inner">
+        <span class="logo" aria-label="Business Commandos">BC</span>
+        <span class="landing-header__counter">Тест прошли <strong>1 200+</strong> предпринимателей</span>
+      </div>
+    </header>
+
+    <main id="main" class="landing-hero">
+      <div class="container landing-hero__inner">
+        <span class="badge">Бесплатный тест &middot; 3 минуты</span>
+        <h1 class="landing-hero__title">Узнайте, что тормозит ваш бизнес — за 3 минуты</h1>
+        <p class="landing-hero__subtitle">Пройдите тест на системность и получите персональное &laquo;Колесо Баланса&raquo; — наглядную карту сильных и слабых зон вашей компании.</p>
+        <button type="button" class="btn btn--primary btn--lg" id="btn-start-test">Пройти тест бесплатно</button>
+        <p class="landing-hero__note">Занимает 3 минуты &middot; 32 вопроса &middot; Без регистрации для старта</p>
+
+        <div class="landing-hero__wheel" aria-hidden="true">
+          <svg id="demo-wheel" viewBox="0 0 400 400" width="320" height="320" role="img" aria-label="Пример колеса баланса бизнеса"></svg>
+        </div>
+      </div>
+    </main>
+
+    <footer class="landing-trust">
+      <div class="container">
+        <div class="trust-stats">
+          <div class="trust-stat">
+            <span class="trust-stat__number">7+</span>
+            <span class="trust-stat__label">лет опыта</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-stat__number">50+</span>
+            <span class="trust-stat__label">компаний</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-stat__number">80%</span>
+            <span class="trust-stat__label">возвращаются</span>
+          </div>
+        </div>
+        <div class="trust-author">
+          <div class="trust-author__photo" aria-hidden="true">ПК</div>
+          <p class="trust-author__text">
+            <strong>Павел Котов</strong> — основатель Business Commandos. 7+ лет внедряет системы управления в бизнесах с оборотом от 30 до 500 млн рублей. Не консультирует — строит системы руками до результата.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ===================== SCREEN 2: QUIZ ===================== -->
+  <section id="screen-quiz" class="screen" aria-label="Тест на системность бизнеса" hidden>
+    <div class="quiz-progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="8">
+      <div class="container">
+        <div class="quiz-progress__info">
+          <span class="quiz-progress__sector" id="progress-sector-label">Сектор 1 из 8 — Стратегия</span>
+        </div>
+        <div class="quiz-progress__track">
+          <div class="quiz-progress__fill" id="progress-fill" style="width: 12.5%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container quiz-body" id="quiz-body">
+      <!-- Quiz content injected by JS -->
+    </div>
+
+    <div class="container quiz-nav">
+      <button type="button" class="btn btn--secondary" id="btn-quiz-back" hidden>
+        <span aria-hidden="true">&larr;</span> Назад
+      </button>
+      <button type="button" class="btn btn--primary" id="btn-quiz-next" disabled>
+        Далее <span aria-hidden="true">&rarr;</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 2.5: BUSINESS TYPE CHOICE ===================== -->
+  <section id="screen-choice" class="screen" aria-label="Выбор типа бизнеса" hidden>
+    <div class="container choice-body">
+      <h2 class="choice__title">Уточните тип вашего бизнеса</h2>
+      <p class="choice__subtitle">Следующий блок подстроится под вашу специфику.</p>
+      <div class="choice__buttons">
+        <button type="button" class="btn btn--choice" data-type="goods">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          Мы производим товары
+        </button>
+        <button type="button" class="btn btn--choice" data-type="services">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Мы оказываем услуги
+        </button>
+      </div>
+      <p class="choice__note">Выберите то, что точнее описывает ваш основной вид деятельности.</p>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 2.7: MICRO FEEDBACK ===================== -->
+  <section id="screen-feedback" class="screen" aria-label="Переход к следующему сектору" hidden>
+    <div class="container feedback-body">
+      <div class="feedback__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <p class="feedback__text" id="feedback-text"></p>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 3: CONTACT FORM ===================== -->
+  <section id="screen-contact" class="screen" aria-label="Форма контактов" hidden>
+    <div class="contact-bg" aria-hidden="true">
+      <svg id="blurred-wheel" viewBox="0 0 400 400" width="360" height="360"></svg>
+    </div>
+    <div class="contact-overlay"></div>
+    <div class="container contact-body">
+      <h2 class="contact__title">Ваше Колесо Баланса готово</h2>
+      <p class="contact__subtitle">Введите контакты — и мы покажем полный результат с расшифровкой слабых зон и рекомендациями.</p>
+
+      <form id="contact-form" class="contact-form" novalidate>
+        <div class="form-group">
+          <label for="field-name" class="form-label">Ваше имя</label>
+          <input type="text" id="field-name" class="form-input" placeholder="Александр" autocomplete="given-name" required>
+          <span class="form-error" id="error-name" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="field-phone" class="form-label">Номер телефона</label>
+          <input type="tel" id="field-phone" class="form-input" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
+          <span class="form-hint">Пришлём код подтверждения</span>
+          <span class="form-error" id="error-phone" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="field-email" class="form-label">Электронная почта</label>
+          <input type="email" id="field-email" class="form-input" placeholder="example@mail.ru" autocomplete="email" required>
+          <span class="form-error" id="error-email" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--lg btn--full" id="btn-submit-contact">
+          Показать мой результат
+        </button>
+        <p class="contact__privacy">Мы не спамим. Вы получите только результаты теста и одно письмо с разбором вашей ситуации.</p>
+      </form>
+
+      <!-- SMS Verification -->
+      <div id="sms-verification" class="sms-verify" hidden>
+        <p class="sms-verify__text">Введите код из SMS, отправленный на ваш номер</p>
+        <div class="sms-verify__input-wrap">
+          <label for="field-sms" class="sr-only">Код подтверждения</label>
+          <input type="text" id="field-sms" class="form-input form-input--code" placeholder="0000" maxlength="4" inputmode="numeric" pattern="[0-9]{4}" autocomplete="one-time-code">
+          <span class="form-error" id="error-sms" role="alert"></span>
+        </div>
+        <button type="button" class="btn btn--primary btn--lg btn--full" id="btn-verify-sms">Подтвердить</button>
+        <button type="button" class="btn btn--link" id="btn-resend-sms">Отправить код повторно</button>
+        <button type="button" class="btn btn--link" id="btn-change-phone">Изменить номер телефона</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 4: RESULTS ===================== -->
+  <section id="screen-results" class="screen" aria-label="Результаты теста" hidden>
+    <div class="container results-body">
+
+      <!-- Score block -->
+      <div class="results-score">
+        <p class="results-score__label">Ваш индекс системности</p>
+        <div class="results-score__value">
+          <span class="results-score__number" id="result-score">0</span>
+          <span class="results-score__max">из 80</span>
+        </div>
+        <div class="results-score__percent" id="result-percent">0%</div>
+      </div>
+
+      <!-- Status block -->
+      <div class="results-status" id="results-status">
+        <h2 class="results-status__title" id="status-title"></h2>
+        <p class="results-status__desc" id="status-desc"></p>
+      </div>
+
+      <!-- Radar chart -->
+      <div class="results-chart">
+        <svg id="result-wheel" viewBox="0 0 500 500" width="100%" role="img" aria-label="Колесо Баланса Бизнеса — ваш результат"></svg>
+        <p class="results-chart__caption">Чем ровнее колесо — тем быстрее едет бизнес. Ваши провалы тормозят всю систему.</p>
+      </div>
+
+      <!-- Weak sectors -->
+      <div class="results-weak" id="results-weak">
+        <h3 class="results-weak__heading">Ваши зоны роста</h3>
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- CTA Diagnostic -->
+      <div class="results-cta">
+        <h3 class="results-cta__title">Хотите разобрать слабые зоны с Павлом лично?</h3>
+        <p class="results-cta__desc">Запишитесь на бесплатную диагностическую сессию — 30 минут в Zoom. Павел Котов лично разберёт ваши результаты и покажет, с чего начать внедрение системы.</p>
+        <a href="#" class="btn btn--accent btn--lg btn--full" id="btn-diagnostic">Записаться на бесплатный разбор</a>
+        <p class="results-cta__note">Без продаж &laquo;в лоб&raquo;. Вы получите конкретные рекомендации — даже если не станете клиентом.</p>
+      </div>
+
+      <!-- Trust block -->
+      <div class="results-trust">
+        <div class="results-trust__author">
+          <div class="trust-author__photo" aria-hidden="true">ПК</div>
+          <div>
+            <strong>Павел Котов</strong>
+            <p>Основатель Business Commandos, 7 лет строит системы управления в бизнесах с оборотом от 30 до 500 млн рублей. Среди клиентов — агентства, производства, сети, девелоперы. 80% клиентов возвращаются.</p>
+          </div>
+        </div>
+
+        <div class="results-trust__reviews">
+          <div class="review-card">
+            <p class="review-card__text">&laquo;За 6 месяцев выручка выросла на 92% — и это не магия, а система, которую внедрила команда Павла.&raquo;</p>
+            <p class="review-card__author">Александр М., собственник агентства недвижимости</p>
+          </div>
+          <div class="review-card">
+            <p class="review-card__text">&laquo;Наконец-то понимаем, где теряем деньги. Управленческий учёт и ОКК изменили всё.&raquo;</p>
+            <p class="review-card__author">Екатерина Р., операционный директор производственной компании</p>
+          </div>
+          <div class="review-card">
+            <p class="review-card__text">&laquo;Адаптация новых сотрудников сократилась с месяца до 3 дней. Без преувеличений.&raquo;</p>
+            <p class="review-card__author">Дмитрий В., владелец сети мастерских (18 филиалов)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share block -->
+      <div class="results-share">
+        <h3 class="results-share__title">Узнайте, как обстоят дела у ваших коллег</h3>
+        <button type="button" class="btn btn--secondary btn--lg" id="btn-share">Поделиться результатом</button>
+      </div>
+
+      <!-- Secondary CTA -->
+      <div class="results-secondary">
+        <h3 class="results-secondary__title">Не готовы к созвону прямо сейчас?</h3>
+        <p class="results-secondary__text">Скачайте чек-лист &laquo;10 признаков бизнеса на ручном управлении&raquo; — и проверьте, сколько из них про ваш бизнес.</p>
+        <button type="button" class="btn btn--secondary" id="btn-download-checklist">Скачать чек-лист бесплатно</button>
+        <p class="results-secondary__note">PDF &middot; Без регистрации</p>
+      </div>
+
+    </div>
+  </section>
+
+  <script defer src="js/main.js"></script>
+</body>
+</html>
