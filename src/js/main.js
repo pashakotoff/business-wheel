@@ -10,6 +10,9 @@
 // Вставьте URL вашего Google Apps Script webhook (см. docs/google-sheets-setup.md)
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby25XvUx7zaRCIomKl55OxYix6BfU9aDSxv3YPM3i11HaHu5RAFa_npxOEOvgeHkd2r6A/exec';
 
+// URL сайта (заменить перед выкладкой на продакшен-домен)
+const SITE_URL = 'https://pashakotoff.github.io/business-wheel/';
+
 // Яндекс Метрика — ID счётчика
 const YM_ID = 105930063;
 
@@ -1011,6 +1014,11 @@ document.getElementById('btn-download-checklist').addEventListener('click', () =
   generateChecklistPDF();
 });
 
+function buildResultsUrl() {
+  var scores = state.sectorAverages.map(function(v) { return v.toFixed(1); });
+  return SITE_URL + '#r=' + btoa(scores.join(','));
+}
+
 function generateChecklistPDF() {
   var jsPDF = window.jspdf.jsPDF;
   var doc = new jsPDF({ unit: 'mm', format: 'a4' });
@@ -1018,6 +1026,7 @@ function generateChecklistPDF() {
   var H = 297;
   var margin = 20;
   var contentW = W - margin * 2;
+  var resultsUrl = buildResultsUrl();
 
   // Фон
   doc.setFillColor(7, 11, 20);
@@ -1028,7 +1037,7 @@ function generateChecklistPDF() {
   doc.rect(0, 0, W, 3, 'F');
 
   // Логотип BC
-  var y = 20;
+  var y = 18;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(18);
   doc.setTextColor(245, 158, 11);
@@ -1039,23 +1048,23 @@ function generateChecklistPDF() {
   doc.text('BUSINESS COMMANDOS', margin + 14, y);
 
   // Заголовок
-  y = 40;
+  y = 36;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(22);
   doc.setTextColor(241, 245, 249);
   doc.text('10 \u043F\u0440\u0438\u0437\u043D\u0430\u043A\u043E\u0432 \u0431\u0438\u0437\u043D\u0435\u0441\u0430', margin, y);
-  y += 10;
+  y += 9;
   doc.text('\u043D\u0430 \u0440\u0443\u0447\u043D\u043E\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438', margin, y);
 
   // Подзаголовок
-  y += 10;
+  y += 9;
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
   doc.setTextColor(148, 163, 184);
   doc.text('\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435, \u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0437 \u044D\u0442\u0438\u0445 \u043F\u0440\u0438\u0437\u043D\u0430\u043A\u043E\u0432 \u2014 \u043F\u0440\u043E \u0432\u0430\u0448 \u0431\u0438\u0437\u043D\u0435\u0441:', margin, y);
 
   // Разделитель
-  y += 8;
+  y += 7;
   doc.setDrawColor(30, 58, 95);
   doc.setLineWidth(0.3);
   doc.line(margin, y, W - margin, y);
@@ -1074,68 +1083,85 @@ function generateChecklistPDF() {
     '\u0412\u044B \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442\u0435 \u0412 \u0431\u0438\u0437\u043D\u0435\u0441\u0435, \u0430 \u043D\u0435 \u041D\u0410\u0414 \u0431\u0438\u0437\u043D\u0435\u0441\u043E\u043C \u2014 80% \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043D\u0430 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u043E\u043D\u043A\u0443'
   ];
 
-  y += 8;
+  y += 6;
   doc.setFontSize(11);
 
   for (var i = 0; i < items.length; i++) {
-    // Чекбокс
     doc.setDrawColor(148, 163, 184);
     doc.setLineWidth(0.4);
     doc.rect(margin, y - 3.5, 4.5, 4.5);
 
-    // Номер
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(245, 158, 11);
     doc.text((i + 1) + '.', margin + 7, y);
 
-    // Текст (с переносом)
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(241, 245, 249);
     var lines = doc.splitTextToSize(items[i], contentW - 18);
     doc.text(lines, margin + 14, y);
-    y += lines.length * 5.5 + 4;
+    y += lines.length * 5.5 + 3;
   }
 
   // Результат
-  y += 4;
+  y += 2;
   doc.setDrawColor(30, 58, 95);
   doc.line(margin, y, W - margin, y);
-  y += 8;
+  y += 6;
 
   doc.setFillColor(19, 28, 46);
-  doc.roundedRect(margin, y - 4, contentW, 24, 3, 3, 'F');
+  doc.roundedRect(margin, y - 4, contentW, 20, 3, 3, 'F');
 
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(12);
-  doc.setTextColor(245, 158, 11);
-  doc.text('\u0415\u0441\u043B\u0438 \u043E\u0442\u043C\u0435\u0447\u0435\u043D\u043E 5+ \u043F\u0443\u043D\u043A\u0442\u043E\u0432 \u2014 \u0432\u0430\u0448 \u0431\u0438\u0437\u043D\u0435\u0441 \u043D\u0430 \u0440\u0443\u0447\u043D\u043E\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438.', margin + 5, y + 5);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(148, 163, 184);
-  doc.text('\u042D\u0442\u043E \u043D\u0435 \u043F\u0440\u0438\u0433\u043E\u0432\u043E\u0440, \u043D\u043E \u043F\u043E\u0442\u043E\u043B\u043E\u043A \u0440\u043E\u0441\u0442\u0430.', margin + 5, y + 14);
-
-  // Футер
-  y = H - 30;
-  doc.setDrawColor(30, 58, 95);
-  doc.line(margin, y, W - margin, y);
-  y += 7;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.setTextColor(241, 245, 249);
-  doc.text('\u0425\u043E\u0442\u0438\u0442\u0435 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C \u0432\u0430\u0448\u0443 \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044E?', margin, y);
-  y += 6;
+  doc.setTextColor(245, 158, 11);
+  doc.text('\u0415\u0441\u043B\u0438 \u043E\u0442\u043C\u0435\u0447\u0435\u043D\u043E 5+ \u043F\u0443\u043D\u043A\u0442\u043E\u0432 \u2014 \u0432\u0430\u0448 \u0431\u0438\u0437\u043D\u0435\u0441 \u043D\u0430 \u0440\u0443\u0447\u043D\u043E\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438.', margin + 5, y + 4);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
   doc.setTextColor(148, 163, 184);
-  doc.text('\u0417\u0430\u043F\u0438\u0448\u0438\u0442\u0435\u0441\u044C \u043D\u0430 \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u0443\u044E 30-\u043C\u0438\u043D\u0443\u0442\u043D\u0443\u044E \u0434\u0438\u0430\u0433\u043D\u043E\u0441\u0442\u0438\u043A\u0443 \u0441 \u041F\u0430\u0432\u043B\u043E\u043C \u041A\u043E\u0442\u043E\u0432\u044B\u043C.', margin, y);
-  y += 6;
-  doc.setTextColor(59, 130, 246);
-  doc.text('businesscommandos.ru', margin, y);
+  doc.text('\u042D\u0442\u043E \u043D\u0435 \u043F\u0440\u0438\u0433\u043E\u0432\u043E\u0440, \u043D\u043E \u043F\u043E\u0442\u043E\u043B\u043E\u043A \u0440\u043E\u0441\u0442\u0430. \u0418 \u0435\u0433\u043E \u043C\u043E\u0436\u043D\u043E \u043F\u0440\u043E\u0431\u0438\u0442\u044C.', margin + 5, y + 12);
+
+  // === БОЛЬШОЙ CTA-БЛОК ===
+  y += 28;
+  var ctaH = 52;
+
+  // Фон CTA
+  doc.setFillColor(24, 35, 58);
+  doc.roundedRect(margin, y, contentW, ctaH, 3, 3, 'F');
+
+  // Золотая полоска слева
+  doc.setFillColor(245, 158, 11);
+  doc.rect(margin, y + 3, 3, ctaH - 6, 'F');
+
+  // Заголовок CTA
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(241, 245, 249);
+  doc.text('\u0423\u0437\u043D\u0430\u043B\u0438 \u0441\u0435\u0431\u044F? \u042D\u0442\u043E \u043C\u043E\u0436\u043D\u043E \u0438\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C.', margin + 10, y + 10);
+
+  // Описание
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(186, 199, 216);
+  doc.text(doc.splitTextToSize('\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0442\u0435\u0441\u0442\u0430 \u0438 \u0437\u0430\u043F\u0438\u0448\u0438\u0442\u0435\u0441\u044C \u043D\u0430 \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u044B\u0439 30-\u043C\u0438\u043D\u0443\u0442\u043D\u044B\u0439 \u0440\u0430\u0437\u0431\u043E\u0440 \u0441 \u041F\u0430\u0432\u043B\u043E\u043C \u041A\u043E\u0442\u043E\u0432\u044B\u043C. \u0420\u0430\u0437\u0431\u0435\u0440\u0451\u043C \u0441\u043B\u0430\u0431\u044B\u0435 \u0437\u043E\u043D\u044B \u0438 \u043D\u0430\u0439\u0434\u0451\u043C \u0442\u043E\u0447\u043A\u0438 \u0440\u043E\u0441\u0442\u0430.', contentW - 20), margin + 10, y + 18);
+
+  // Кнопка-ссылка
+  var btnY = y + 34;
+  var btnW = contentW - 20;
+  var btnH = 12;
+  doc.setFillColor(245, 158, 11);
+  doc.roundedRect(margin + 10, btnY, btnW, btnH, 3, 3, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(7, 11, 20);
+  doc.textWithLink('\u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 \u0432\u0430\u0448\u0438 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0438 \u0437\u0430\u043F\u0438\u0448\u0438\u0442\u0435\u0441\u044C \u043D\u0430 \u0440\u0430\u0437\u0431\u043E\u0440  \u2192', margin + 10 + btnW / 2, btnY + btnH / 2 + 1.5, { url: resultsUrl, align: 'center' });
+  doc.link(margin + 10, btnY, btnW, btnH, { url: resultsUrl });
 
   // Копирайт
+  doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(71, 85, 105);
-  doc.text('\u00A9 Business Commandos', W - margin, H - 10, { align: 'right' });
+  doc.text('\u00A9 Business Commandos', W - margin, H - 8, { align: 'right' });
+  doc.text('businesscommandos.ru', margin, H - 8);
 
   // Золотая линия снизу
   doc.setFillColor(245, 158, 11);
@@ -1204,10 +1230,37 @@ function sendLeadData() {
   });
 }
 
+/* === RESTORE RESULTS FROM URL HASH === */
+
+function tryRestoreFromHash() {
+  var hash = window.location.hash;
+  if (!hash || hash.indexOf('#r=') !== 0) return false;
+
+  try {
+    var encoded = hash.slice(3); // убираем '#r='
+    var decoded = atob(encoded);
+    var values = decoded.split(',').map(Number);
+
+    if (values.length !== 8 || values.some(isNaN)) return false;
+
+    // Восстанавливаем результаты
+    state.sectorAverages = values;
+    showScreen('results');
+    renderResults();
+    prefillDiagnosticPhone();
+    reachGoal('results_restored');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 /* === INITIALIZATION === */
 
 function init() {
-  drawDemoWheel();
+  if (!tryRestoreFromHash()) {
+    drawDemoWheel();
+  }
 }
 
 init();
