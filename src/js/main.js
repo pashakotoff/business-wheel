@@ -1004,60 +1004,145 @@ function copyToClipboard(text) {
   });
 }
 
-/* === CHECKLIST DOWNLOAD === */
+/* === CHECKLIST DOWNLOAD (PDF) === */
 
 document.getElementById('btn-download-checklist').addEventListener('click', () => {
   reachGoal('checklist_download');
-  const checklist = `10 ПРИЗНАКОВ БИЗНЕСА НА РУЧНОМ УПРАВЛЕНИИ
-=========================================
-
-Чек-лист от Павла Котова | Business Commandos
-businesscommandos.ru
-
-Проверьте, сколько из этих признаков — про ваш бизнес:
-
-☐ 1. Без вас ничего не решается — сотрудники ждут указаний по каждому вопросу
-
-☐ 2. Вы не можете уйти в отпуск больше чем на неделю без потерь для бизнеса
-
-☐ 3. Нет чётких должностных инструкций — каждый делает «что скажут»
-
-☐ 4. Финансы непрозрачны — вы не знаете точную чистую прибыль за прошлый месяц
-
-☐ 5. Планёрки хаотичны или не проводятся вообще — задачи ставятся в мессенджерах
-
-☐ 6. CRM не заполняется или заполняется для галочки
-
-☐ 7. Новый сотрудник входит в должность месяц и дольше — потому что учить некому и нечем
-
-☐ 8. Продажи зависят от одного-двух «звёздных» менеджеров
-
-☐ 9. Маркетинг — это «давайте запустим рекламу» без плана и аналитики
-
-☐ 10. Вы работаете В бизнесе, а не НАД бизнесом — 80% времени уходит на операционку
-
-
-Если отмечено 5+ пунктов — ваш бизнес на ручном управлении.
-Это не приговор, но потолок роста.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Хотите разобрать вашу ситуацию?
-Запишитесь на бесплатную 30-минутную диагностику с Павлом Котовым.
-
-businesscommandos.ru
-
-© Business Commandos
-`;
-
-  const blob = new Blob([checklist], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'checklist-ruchnoe-upravlenie.txt';
-  a.click();
-  URL.revokeObjectURL(url);
+  generateChecklistPDF();
 });
+
+function generateChecklistPDF() {
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  var W = 210;
+  var H = 297;
+  var margin = 20;
+  var contentW = W - margin * 2;
+
+  // Фон
+  doc.setFillColor(7, 11, 20);
+  doc.rect(0, 0, W, H, 'F');
+
+  // Золотая линия сверху
+  doc.setFillColor(245, 158, 11);
+  doc.rect(0, 0, W, 3, 'F');
+
+  // Логотип BC
+  var y = 20;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.setTextColor(245, 158, 11);
+  doc.text('BC', margin, y);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(148, 163, 184);
+  doc.text('BUSINESS COMMANDOS', margin + 14, y);
+
+  // Заголовок
+  y = 40;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.setTextColor(241, 245, 249);
+  doc.text('10 \u043F\u0440\u0438\u0437\u043D\u0430\u043A\u043E\u0432 \u0431\u0438\u0437\u043D\u0435\u0441\u0430', margin, y);
+  y += 10;
+  doc.text('\u043D\u0430 \u0440\u0443\u0447\u043D\u043E\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438', margin, y);
+
+  // Подзаголовок
+  y += 10;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.setTextColor(148, 163, 184);
+  doc.text('\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435, \u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0437 \u044D\u0442\u0438\u0445 \u043F\u0440\u0438\u0437\u043D\u0430\u043A\u043E\u0432 \u2014 \u043F\u0440\u043E \u0432\u0430\u0448 \u0431\u0438\u0437\u043D\u0435\u0441:', margin, y);
+
+  // Разделитель
+  y += 8;
+  doc.setDrawColor(30, 58, 95);
+  doc.setLineWidth(0.3);
+  doc.line(margin, y, W - margin, y);
+
+  // Пункты чек-листа
+  var items = [
+    '\u0411\u0435\u0437 \u0432\u0430\u0441 \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u0440\u0435\u0448\u0430\u0435\u0442\u0441\u044F \u2014 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438 \u0436\u0434\u0443\u0442 \u0443\u043A\u0430\u0437\u0430\u043D\u0438\u0439 \u043F\u043E \u043A\u0430\u0436\u0434\u043E\u043C\u0443 \u0432\u043E\u043F\u0440\u043E\u0441\u0443',
+    '\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0443\u0439\u0442\u0438 \u0432 \u043E\u0442\u043F\u0443\u0441\u043A \u0431\u043E\u043B\u044C\u0448\u0435 \u0447\u0435\u043C \u043D\u0430 \u043D\u0435\u0434\u0435\u043B\u044E \u0431\u0435\u0437 \u043F\u043E\u0442\u0435\u0440\u044C',
+    '\u041D\u0435\u0442 \u0447\u0451\u0442\u043A\u0438\u0445 \u0434\u043E\u043B\u0436\u043D\u043E\u0441\u0442\u043D\u044B\u0445 \u0438\u043D\u0441\u0442\u0440\u0443\u043A\u0446\u0438\u0439 \u2014 \u043A\u0430\u0436\u0434\u044B\u0439 \u0434\u0435\u043B\u0430\u0435\u0442 \u00AB\u0447\u0442\u043E \u0441\u043A\u0430\u0436\u0443\u0442\u00BB',
+    '\u0424\u0438\u043D\u0430\u043D\u0441\u044B \u043D\u0435\u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u044B \u2014 \u0432\u044B \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435 \u0442\u043E\u0447\u043D\u0443\u044E \u0447\u0438\u0441\u0442\u0443\u044E \u043F\u0440\u0438\u0431\u044B\u043B\u044C \u0437\u0430 \u043F\u0440\u043E\u0448\u043B\u044B\u0439 \u043C\u0435\u0441\u044F\u0446',
+    '\u041F\u043B\u0430\u043D\u0451\u0440\u043A\u0438 \u0445\u0430\u043E\u0442\u0438\u0447\u043D\u044B \u0438\u043B\u0438 \u043D\u0435 \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u2014 \u0437\u0430\u0434\u0430\u0447\u0438 \u0441\u0442\u0430\u0432\u044F\u0442\u0441\u044F \u0432 \u043C\u0435\u0441\u0441\u0435\u043D\u0434\u0436\u0435\u0440\u0430\u0445',
+    'CRM \u043D\u0435 \u0437\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442\u0441\u044F \u0438\u043B\u0438 \u0437\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0433\u0430\u043B\u043E\u0447\u043A\u0438',
+    '\u041D\u043E\u0432\u044B\u0439 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A \u0432\u0445\u043E\u0434\u0438\u0442 \u0432 \u0434\u043E\u043B\u0436\u043D\u043E\u0441\u0442\u044C \u043C\u0435\u0441\u044F\u0446 \u0438 \u0434\u043E\u043B\u044C\u0448\u0435 \u2014 \u0443\u0447\u0438\u0442\u044C \u043D\u0435\u043A\u043E\u043C\u0443 \u0438 \u043D\u0435\u0447\u0435\u043C',
+    '\u041F\u0440\u043E\u0434\u0430\u0436\u0438 \u0437\u0430\u0432\u0438\u0441\u044F\u0442 \u043E\u0442 \u043E\u0434\u043D\u043E\u0433\u043E-\u0434\u0432\u0443\u0445 \u00AB\u0437\u0432\u0451\u0437\u0434\u043D\u044B\u0445\u00BB \u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440\u043E\u0432',
+    '\u041C\u0430\u0440\u043A\u0435\u0442\u0438\u043D\u0433 \u2014 \u044D\u0442\u043E \u00AB\u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u043C \u0440\u0435\u043A\u043B\u0430\u043C\u0443\u00BB \u0431\u0435\u0437 \u043F\u043B\u0430\u043D\u0430 \u0438 \u0430\u043D\u0430\u043B\u0438\u0442\u0438\u043A\u0438',
+    '\u0412\u044B \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442\u0435 \u0412 \u0431\u0438\u0437\u043D\u0435\u0441\u0435, \u0430 \u043D\u0435 \u041D\u0410\u0414 \u0431\u0438\u0437\u043D\u0435\u0441\u043E\u043C \u2014 80% \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043D\u0430 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u043E\u043D\u043A\u0443'
+  ];
+
+  y += 8;
+  doc.setFontSize(11);
+
+  for (var i = 0; i < items.length; i++) {
+    // Чекбокс
+    doc.setDrawColor(148, 163, 184);
+    doc.setLineWidth(0.4);
+    doc.rect(margin, y - 3.5, 4.5, 4.5);
+
+    // Номер
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(245, 158, 11);
+    doc.text((i + 1) + '.', margin + 7, y);
+
+    // Текст (с переносом)
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(241, 245, 249);
+    var lines = doc.splitTextToSize(items[i], contentW - 18);
+    doc.text(lines, margin + 14, y);
+    y += lines.length * 5.5 + 4;
+  }
+
+  // Результат
+  y += 4;
+  doc.setDrawColor(30, 58, 95);
+  doc.line(margin, y, W - margin, y);
+  y += 8;
+
+  doc.setFillColor(19, 28, 46);
+  doc.roundedRect(margin, y - 4, contentW, 24, 3, 3, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(245, 158, 11);
+  doc.text('\u0415\u0441\u043B\u0438 \u043E\u0442\u043C\u0435\u0447\u0435\u043D\u043E 5+ \u043F\u0443\u043D\u043A\u0442\u043E\u0432 \u2014 \u0432\u0430\u0448 \u0431\u0438\u0437\u043D\u0435\u0441 \u043D\u0430 \u0440\u0443\u0447\u043D\u043E\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438.', margin + 5, y + 5);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(148, 163, 184);
+  doc.text('\u042D\u0442\u043E \u043D\u0435 \u043F\u0440\u0438\u0433\u043E\u0432\u043E\u0440, \u043D\u043E \u043F\u043E\u0442\u043E\u043B\u043E\u043A \u0440\u043E\u0441\u0442\u0430.', margin + 5, y + 14);
+
+  // Футер
+  y = H - 30;
+  doc.setDrawColor(30, 58, 95);
+  doc.line(margin, y, W - margin, y);
+  y += 7;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(241, 245, 249);
+  doc.text('\u0425\u043E\u0442\u0438\u0442\u0435 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C \u0432\u0430\u0448\u0443 \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044E?', margin, y);
+  y += 6;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(148, 163, 184);
+  doc.text('\u0417\u0430\u043F\u0438\u0448\u0438\u0442\u0435\u0441\u044C \u043D\u0430 \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u0443\u044E 30-\u043C\u0438\u043D\u0443\u0442\u043D\u0443\u044E \u0434\u0438\u0430\u0433\u043D\u043E\u0441\u0442\u0438\u043A\u0443 \u0441 \u041F\u0430\u0432\u043B\u043E\u043C \u041A\u043E\u0442\u043E\u0432\u044B\u043C.', margin, y);
+  y += 6;
+  doc.setTextColor(59, 130, 246);
+  doc.text('businesscommandos.ru', margin, y);
+
+  // Копирайт
+  doc.setFontSize(8);
+  doc.setTextColor(71, 85, 105);
+  doc.text('\u00A9 Business Commandos', W - margin, H - 10, { align: 'right' });
+
+  // Золотая линия снизу
+  doc.setFillColor(245, 158, 11);
+  doc.rect(0, H - 3, W, 3, 'F');
+
+  doc.save('checklist-ruchnoe-upravlenie.pdf');
+}
 
 /* === SEND LEAD DATA === */
 
