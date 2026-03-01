@@ -8,7 +8,7 @@
 /* === CONFIG === */
 
 // Вставьте URL вашего Google Apps Script webhook (см. docs/google-sheets-setup.md)
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzhfAjWUJFzs-FHrVcKrFxyfG8JSezkyHp7zIAf3z70hJJcuncFhqGrK7lLaP-7S9PABg/exec';
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby25XvUx7zaRCIomKl55OxYix6BfU9aDSxv3YPM3i11HaHu5RAFa_npxOEOvgeHkd2r6A/exec';
 
 // Яндекс Метрика — ID счётчика
 const YM_ID = 105930063;
@@ -752,6 +752,7 @@ dom.contactForm.addEventListener('submit', (e) => {
     reachGoal('contact_submit');
     showScreen('results');
     renderResults();
+    prefillDiagnosticPhone();
   }
 });
 
@@ -902,11 +903,74 @@ function animateNumber(el, target, decimals) {
   requestAnimationFrame(tick);
 }
 
-/* === DIAGNOSTIC CTA === */
+/* === DIAGNOSTIC CTA (inline-форма на странице результатов) === */
 
-document.getElementById('btn-diagnostic').addEventListener('click', () => {
-  reachGoal('diagnostic_click');
+// Предзаполнение телефона при показе результатов
+function prefillDiagnosticPhone() {
+  var phoneField = document.getElementById('diag-phone');
+  if (phoneField && state.contactData.phone) {
+    phoneField.value = state.contactData.phone;
+  }
+}
+
+// Выбор способа связи (toggle)
+document.querySelectorAll('.btn--method').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    if (btn.classList.contains('btn--method--selected')) {
+      btn.classList.remove('btn--method--selected');
+      return;
+    }
+    document.querySelectorAll('.btn--method').forEach(function(b) {
+      b.classList.remove('btn--method--selected');
+    });
+    btn.classList.add('btn--method--selected');
+  });
 });
+
+// Отправка заявки
+document.getElementById('btn-diagnostic').addEventListener('click', function() {
+  reachGoal('diagnostic_click');
+
+  var phoneField = document.getElementById('diag-phone');
+  var phone = phoneField.value.trim();
+
+  // Обновляем телефон если изменили
+  if (phone) {
+    state.contactData.phone = phone;
+  }
+
+  // Выбранный способ связи (может быть пустым)
+  var selectedMethod = document.querySelector('.btn--method--selected');
+  var preferredContact = selectedMethod ? selectedMethod.dataset.method : '';
+
+  // Отправка в Google Sheets
+  sendDiagnosticData(preferredContact);
+
+  // Показываем подтверждение, скрываем форму
+  document.getElementById('diagnostic-form').hidden = true;
+  document.getElementById('diagnostic-success').hidden = false;
+});
+
+function sendDiagnosticData(preferredContact) {
+  if (!WEBHOOK_URL) return;
+
+  var payload = {
+    action: 'diagnostic_request',
+    email: state.contactData.email,
+    phone: state.contactData.phone,
+    name: state.contactData.name,
+    preferredContact: preferredContact
+  };
+
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  }).catch(function(err) {
+    console.error('Ошибка отправки заявки на диагностику:', err);
+  });
+}
 
 /* === SHARE === */
 

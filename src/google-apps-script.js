@@ -22,6 +22,11 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
     var sheet = getOrCreateSheet();
 
+    // Запрос на диагностику — обновляем существующую строку
+    if (data.action === 'diagnostic_request') {
+      return handleDiagnosticRequest(sheet, data);
+    }
+
     var row = [
       new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }),
       data.name || '',
@@ -39,7 +44,9 @@ function doPost(e) {
       data.totalScore || 0,
       data.status || '',
       data.weakZone1 || '',
-      data.weakZone2 || ''
+      data.weakZone2 || '',
+      '', // Хочет диагностику (заполняется позже)
+      ''  // Способ связи (заполняется позже)
     ];
 
     // Добавляем все 32 ответа на вопросы (по 4 на сектор)
@@ -69,6 +76,45 @@ function doPost(e) {
   }
 }
 
+// Обработка заявки на диагностику — находим строку по email и обновляем
+function handleDiagnosticRequest(sheet, data) {
+  var contactMethods = { telegram: 'Telegram', whatsapp: 'WhatsApp', phone: 'Телефон' };
+  var email = data.email || '';
+  var phone = data.phone || '';
+  var method = contactMethods[data.preferredContact] || data.preferredContact || '';
+
+  // Ищем строку по email (колонка D = индекс 4, 1-based)
+  var allData = sheet.getDataRange().getValues();
+  var targetRow = -1;
+
+  // Ищем с конца — берём самую свежую запись
+  for (var i = allData.length - 1; i >= 1; i--) {
+    if (allData[i][3] === email) {
+      targetRow = i + 1; // Переводим в 1-based
+      break;
+    }
+  }
+
+  if (targetRow > 0) {
+    // Обновляем колонки: Хочет диагностику (18), Способ связи (19)
+    sheet.getRange(targetRow, 18).setValue('Да');
+    sheet.getRange(targetRow, 19).setValue(method);
+
+    // Обновляем телефон если изменился
+    if (phone && phone !== allData[targetRow - 1][2]) {
+      sheet.getRange(targetRow, 3).setValue(phone);
+    }
+
+    // Подсветка — зелёный фон для диагностики
+    sheet.getRange(targetRow, 18).setBackground('#DCFCE7').setFontColor('#16A34A').setFontWeight('bold');
+    sheet.getRange(targetRow, 19).setBackground('#DBEAFE').setFontColor('#2563EB');
+  }
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ result: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 // Создать лист с заголовками если его нет
 function getOrCreateSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -95,6 +141,8 @@ function getOrCreateSheet() {
       'Статус',
       'Слабая зона 1',
       'Слабая зона 2',
+      'Хочет диагностику',
+      'Способ связи',
       // Продажи (4 вопроса)
       'Продажи: Есть CRM, менеджеры вносят все данные',
       'Продажи: Конверсия на каждом этапе воронки измеряется',
@@ -159,7 +207,9 @@ function getOrCreateSheet() {
     sheet.setColumnWidth(15, 200); // Статус
     sheet.setColumnWidth(16, 180); // Слабая зона 1
     sheet.setColumnWidth(17, 180); // Слабая зона 2
-    for (var j = 18; j <= 49; j++) {
+    sheet.setColumnWidth(18, 140); // Хочет диагностику
+    sheet.setColumnWidth(19, 140); // Способ связи
+    for (var j = 20; j <= 51; j++) {
       sheet.setColumnWidth(j, 200); // Ответы на вопросы
     }
 
