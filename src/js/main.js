@@ -11,7 +11,7 @@
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby25XvUx7zaRCIomKl55OxYix6BfU9aDSxv3YPM3i11HaHu5RAFa_npxOEOvgeHkd2r6A/exec';
 
 // URL сайта (заменить перед выкладкой на продакшен-домен)
-const SITE_URL = 'https://pashakotoff.github.io/business-wheel/';
+const SITE_URL = 'https://audit.businesscommandos.com/';
 
 // Яндекс Метрика — ID счётчика
 const YM_ID = 105930063;
