@@ -372,10 +372,9 @@ h4 {
 }
 
 .site-logo {
+  width: 179px;
   height: 72px;
-  width: auto;
-  max-width: none;
-  display: block;
+  background: url('../images/logos/logo-horizontal-white.png') no-repeat left center / contain;
   flex-shrink: 0;
 }
 
