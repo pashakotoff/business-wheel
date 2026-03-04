@@ -364,15 +364,19 @@ h4 {
 }
 
 .logo {
-  flex-shrink: 0;
-  line-height: 0;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  letter-spacing: 0.04em;
+  font-weight: 400;
 }
 
-.logo img {
+.site-logo {
   height: 72px;
   width: auto;
   max-width: none;
   display: block;
+  flex-shrink: 0;
 }
 
 .landing-header__counter {
