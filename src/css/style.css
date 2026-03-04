@@ -366,7 +366,8 @@ h4 {
 .logo {
   display: block;
   height: 72px !important;
-  width: auto !important;
+  width: 179px !important;
+  max-width: none !important;
   flex-shrink: 0;
 }
 
