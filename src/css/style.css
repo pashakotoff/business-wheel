@@ -367,6 +367,7 @@ h4 {
   display: block;
   height: 72px;
   width: auto;
+  flex-shrink: 0;
 }
 
 .landing-header__counter {
