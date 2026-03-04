@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://audit.businesscommandos.ru/sitemap.xml
