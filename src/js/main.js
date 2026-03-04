@@ -589,6 +589,7 @@ dom.quizBody.addEventListener('click', (e) => {
   const key = `${sectorId}-${questionIndex}`;
 
   state.answers[key] = value;
+  saveProgress();
 
   // Update visual state for this question group
   const group = btn.closest('.rating-buttons');
@@ -753,6 +754,25 @@ dom.contactForm.addEventListener('submit', (e) => {
     calculateResults();
     sendLeadData();
     reachGoal('contact_submit');
+    localStorage.removeItem('bw_progress');
+
+    // Если пришли с result.html (challenge) — редирект обратно с моими результатами
+    var refRaw = sessionStorage.getItem('bw_ref');
+    if (refRaw) {
+      try {
+        var ref = JSON.parse(refRaw);
+        sessionStorage.removeItem('bw_ref');
+        var myScores = state.sectorAverages.map(function(v) { return v.toFixed(1); }).join(',');
+        var myName = encodeURIComponent(state.contactData.name);
+        window.location.href = 'result.html?n=' + encodeURIComponent(ref.n) +
+          '&s=' + encodeURIComponent(ref.s) +
+          '&b=' + ref.b +
+          '&my=' + myScores +
+          '&myname=' + myName;
+        return;
+      } catch (e) { /* если JSON сломан — показываем обычные результаты */ }
+    }
+
     showScreen('results');
     renderResults();
     prefillDiagnosticPhone();
@@ -978,34 +998,26 @@ function sendDiagnosticData(preferredContact) {
 /* === SHARE === */
 
 dom.btnShare.addEventListener('click', () => {
-  const totalScore = state.sectorAverages.reduce((a, b) => a + b, 0);
-  const shareText = `Прошёл тест на системность бизнеса. Мой индекс — ${totalScore.toFixed(1)} из 80. А какой у тебя? Проверь свой бизнес бесплатно`;
+  var scores = state.sectorAverages.map(function(v) { return v.toFixed(1); });
+  var encodedName = encodeURIComponent(state.contactData.name || 'Я');
+  var btype = state.businessType || 'services';
+  var resultUrl = SITE_URL + 'result.html?n=' + encodedName + '&s=' + scores.join(',') + '&b=' + btype;
+  var totalScore = state.sectorAverages.reduce(function(a, b) { return a + b; }, 0);
+  var shareText = 'Прошёл тест на системность бизнеса. Мой индекс — ' + totalScore.toFixed(1) + ' из 80. А какой у тебя? → ' + resultUrl;
 
-  if (navigator.share) {
-    navigator.share({
-      title: 'Тест на системность бизнеса',
-      text: shareText,
-      url: window.location.href
-    }).catch(() => {
-      copyToClipboard(shareText);
-    });
-  } else {
-    copyToClipboard(shareText);
-  }
-});
+  reachGoal('share_click');
 
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text + ' ' + window.location.href).then(() => {
-    const btn = dom.btnShare;
-    const original = btn.textContent;
-    btn.textContent = 'Скопировано!';
-    setTimeout(() => {
+  navigator.clipboard.writeText(shareText).then(function() {
+    var btn = dom.btnShare;
+    var hint = document.getElementById('share-hint');
+    var original = btn.textContent;
+    btn.textContent = '✓ Скопировано!';
+    if (hint) hint.hidden = false;
+    setTimeout(function() {
       btn.textContent = original;
-    }, 2000);
-  }).catch(() => {
-    // Fallback: do nothing silently
-  });
-}
+    }, 3000);
+  }).catch(function() {});
+});
 
 /* === CHECKLIST DOWNLOAD (PDF) === */
 
@@ -1044,7 +1056,7 @@ function generateChecklistPDF() {
   }).join('');
 
   var el = document.createElement('div');
-  el.style.cssText = 'position:fixed;top:-9999px;left:0;z-index:-1;width:794px;background:#070B14;font-family:Arial,Helvetica,sans-serif;';
+  el.style.cssText = 'position:absolute;left:-9999px;top:0;width:794px;background:#070B14;font-family:Arial,Helvetica,sans-serif;';
   el.innerHTML =
     '<div style="position:relative;padding:24px 32px 36px;background:#070B14;min-height:1122px;">' +
       '<div style="position:absolute;top:0;left:0;right:0;height:5px;background:#F59E0B;"></div>' +
@@ -1178,9 +1190,74 @@ function tryRestoreFromHash() {
   }
 }
 
+/* === REF PARAMS (сохраняем контекст с result.html challenge) === */
+
+function readRefParams() {
+  var params = new URLSearchParams(window.location.search);
+  var refN = params.get('ref_n');
+  var refS = params.get('ref_s');
+  var refB = params.get('ref_b');
+  if (refN && refS) {
+    sessionStorage.setItem('bw_ref', JSON.stringify({ n: refN, s: refS, b: refB || 'services' }));
+  }
+}
+
+/* === PROGRESS SAVE/RESTORE (localStorage) === */
+
+function saveProgress() {
+  try {
+    localStorage.setItem('bw_progress', JSON.stringify({
+      answers: state.answers,
+      btype: state.businessType
+    }));
+  } catch (e) {}
+}
+
+function tryRestoreProgress() {
+  try {
+    var saved = localStorage.getItem('bw_progress');
+    if (!saved) return false;
+    var data = JSON.parse(saved);
+    if (!data.answers || Object.keys(data.answers).length === 0) return false;
+    state.answers = data.answers;
+    if (data.btype) state.businessType = data.btype;
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/* === DEMO MODE (только для локального просмотра) === */
+
+function tryDemoMode() {
+  var params = new URLSearchParams(window.location.search);
+  var demo = params.get('demo');
+  if (!demo) return false;
+
+  var demoScores = [7, 4, 8, 3, 6, 5, 5, 7];
+  state.businessType = 'services';
+  state.sectorAverages = demoScores;
+  state.contactData = { name: 'Павел', phone: '+7 900 000-00-00', email: 'demo@example.com' };
+
+  if (demo === 'contact') {
+    showScreen('contact');
+    return true;
+  }
+  if (demo === 'results') {
+    showScreen('results');
+    renderResults();
+    prefillDiagnosticPhone();
+    return true;
+  }
+  return false;
+}
+
 /* === INITIALIZATION === */
 
 function init() {
+  readRefParams();
+  tryRestoreProgress();
+  if (tryDemoMode()) return;
   if (!tryRestoreFromHash()) {
     drawDemoWheel();
   }
