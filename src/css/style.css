@@ -167,6 +167,7 @@ img {
 
 /* === LAYOUT === */
 .container {
+  width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--container-padding);
@@ -1024,8 +1025,10 @@ h4 {
 }
 
 .results-chart svg {
+  width: 100%;
   max-width: 420px;
   margin-inline: auto;
+  display: block;
 }
 
 .results-chart__caption {
