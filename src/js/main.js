@@ -1032,10 +1032,8 @@ function buildResultsUrl() {
 }
 
 function generateChecklistPDF() {
-  var a = document.createElement('a');
-  a.href = 'checklist.pdf';
-  a.download = 'checklist-ruchnoe-upravlenie.pdf';
-  a.click();
+  var url = 'checklist.html?resultsUrl=' + encodeURIComponent(buildResultsUrl());
+  window.open(url, '_blank');
 }
 
 /* === SEND LEAD DATA === */

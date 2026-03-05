@@ -298,11 +298,15 @@
   </div>
 
   <script>
-    // Авто-печать при открытии в новой вкладке
+    // Подставить персональный URL результатов из параметра
+    var resultsUrl = new URLSearchParams(window.location.search).get('resultsUrl');
+    if (resultsUrl) {
+      document.querySelector('.cta-btn').href = resultsUrl;
+    }
+
+    // Авто-печать при открытии в новой вкладке — ждём загрузки шрифтов
     if (window.opener) {
-      window.addEventListener('load', function() {
-        window.print();
-      });
+      document.fonts.ready.then(function() { window.print(); });
     }
   </script>
 </body>
