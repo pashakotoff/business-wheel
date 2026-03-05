@@ -4,3 +4,9 @@ dist/
 node_modules/
 .env
 *.zip
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
