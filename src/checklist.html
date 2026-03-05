@@ -9,7 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box; margin: 0; padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
 
     :root {
       --bg:        #070B14;
@@ -197,13 +201,15 @@
     }
 
     @media print {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-      color-adjust: exact;
-
-      body { background: var(--bg) !important; }
+      body { background: #070B14 !important; }
+      .page { background: #070B14 !important; margin: 0; width: 100%; }
+      .content { background: #070B14 !important; }
+      .stripe { background: #F59E0B !important; }
+      .item { background: #0C1526 !important; border-color: #1E3A5F !important; }
+      .result { background: #131C2E !important; border-color: #1E3A5F !important; }
+      .cta { background: #131C2E !important; border-color: #1E3A5F !important; border-left-color: #F59E0B !important; }
+      .cta-btn { background: #F59E0B !important; color: #070B14 !important; }
       .print-wrap { display: none; }
-      .page { margin: 0; width: 100%; }
     }
   </style>
 </head>
