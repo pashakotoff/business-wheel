@@ -2,19 +2,34 @@
  * Google Apps Script — Приём лидов из теста "Колесо Баланса"
  * Business Commandos
  *
- * ИНСТРУКЦИЯ:
+ * ШАГ 1 — ПОДКЛЮЧЕНИЕ К GOOGLE ТАБЛИЦЕ:
  * 1. Создайте новую Google Таблицу
  * 2. Меню → Расширения → Apps Script
  * 3. Вставьте этот код вместо содержимого Code.gs
- * 4. Нажмите "Развернуть" → "Новое развёртывание"
- * 5. Тип: "Веб-приложение"
- * 6. Выполнять от: "Я" (ваш аккаунт)
- * 7. Доступ: "Все" (для приёма данных с сайта)
- * 8. Скопируйте URL и вставьте в WEBHOOK_URL на сайте
+ * 4. Нажмите "Сохранить" (Ctrl+S)
+ * 5. Нажмите "Развернуть" → "Новое развёртывание"
+ * 6. Тип: "Веб-приложение"
+ * 7. Выполнять от: "Я" (ваш аккаунт)
+ * 8. Доступ: "Все" (для приёма данных с сайта)
+ * 9. Скопируйте URL развёртывания и вставьте в WEBHOOK_URL в файле main.js на сайте
+ *
+ * ШАГ 2 — НАСТРОЙКА TELEGRAM-ОПОВЕЩЕНИЙ:
+ * 1. Создайте нового бота через @BotFather в Telegram (команда /newbot)
+ * 2. Скопируйте полученный токен и вставьте ниже в TELEGRAM_BOT_TOKEN
+ * 3. Добавьте бота в нужные группы / чаты, куда хотите получать уведомления
+ * 4. Напишите боту любое сообщение (или отправьте что-нибудь в группу с ботом)
+ * 5. В редакторе Apps Script выберите функцию discoverAndSaveChats и нажмите "Выполнить"
+ *    → Бот найдёт все чаты и запомнит их. Смотрите результат в "Журнале выполнения"
+ * 6. Готово — при каждом новом лиде уведомление придёт во все эти чаты
+ *
+ * Если добавили бота в новый чат — повторите пункты 4–5.
  */
 
 // Название листа в таблице
 var SHEET_NAME = 'Лиды';
+
+// Telegram Bot Token — вставьте свой токен
+var TELEGRAM_BOT_TOKEN = 'ВСТАВЬТЕ_ТОКЕН_СЮДА';
 
 // Обработка POST-запросов с сайта
 function doPost(e) {
@@ -65,6 +80,35 @@ function doPost(e) {
     var lastRow = sheet.getLastRow();
     formatRow(sheet, lastRow, data.totalScore / 8);
 
+    // Telegram-уведомление о новом лиде
+    try {
+      var totalScore = data.totalScore || 0;
+      var maxScore = 80;
+      var percent = Math.round(totalScore / maxScore * 100);
+      var businessTypeLabel = data.businessType === 'goods' ? 'Товары' : 'Услуги';
+
+      var weakZones = [];
+      if (data.weakZone1) weakZones.push(data.weakZone1);
+      if (data.weakZone2) weakZones.push(data.weakZone2);
+
+      var msg = '🔔 *Новый лид — Колесо Баланса*\n\n'
+        + '👤 *' + (data.name || 'Без имени') + '*\n'
+        + '📞 ' + (data.phone || '—') + '\n'
+        + '📧 ' + (data.email || '—') + '\n'
+        + '🏢 ' + businessTypeLabel + '\n\n'
+        + '📊 Результат: *' + totalScore + '/' + maxScore + '* (' + percent + '%)\n'
+        + '📋 Статус: ' + (data.status || '—') + '\n';
+
+      if (weakZones.length > 0) {
+        msg += '⚠️ Слабые зоны: ' + weakZones.join(', ') + '\n';
+      }
+
+      sendTelegramToAll(msg);
+    } catch (tgError) {
+      // Не прерываем основной поток если Telegram недоступен
+      Logger.log('Telegram error: ' + tgError.toString());
+    }
+
     return ContentService
       .createTextOutput(JSON.stringify({ result: 'ok' }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -110,9 +154,117 @@ function handleDiagnosticRequest(sheet, data) {
     sheet.getRange(targetRow, 19).setBackground('#DBEAFE').setFontColor('#2563EB');
   }
 
+  // Telegram-уведомление о заявке на диагностику
+  try {
+    var name = targetRow > 0 ? allData[targetRow - 1][1] : (data.name || '—');
+    var msg = '🎯 *Заявка на диагностику!*\n\n'
+      + '👤 *' + name + '*\n'
+      + '📞 ' + (phone || '—') + '\n'
+      + '📧 ' + (email || '—') + '\n'
+      + '💬 Способ связи: *' + (method || '—') + '*';
+
+    sendTelegramToAll(msg);
+  } catch (tgError) {
+    Logger.log('Telegram error: ' + tgError.toString());
+  }
+
   return ContentService
     .createTextOutput(JSON.stringify({ result: 'ok' }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Удалить личный чат из списка рассылки — запусти один раз
+function removePersonalChat() {
+  var props = PropertiesService.getScriptProperties();
+  var stored = props.getProperty('tg_chat_ids');
+  if (!stored) return;
+  var knownIds = JSON.parse(stored);
+  delete knownIds['38502817'];
+  props.setProperty('tg_chat_ids', JSON.stringify(knownIds));
+  Logger.log('Остались чаты: ' + JSON.stringify(knownIds));
+}
+
+// ДИАГНОСТИКА — запусти один раз, потом удали
+function debugTelegram() {
+  var webhookUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getWebhookInfo';
+  var updatesUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getUpdates?limit=5';
+
+  var webhook = JSON.parse(UrlFetchApp.fetch(webhookUrl, { muteHttpExceptions: true }).getContentText());
+  var updates = JSON.parse(UrlFetchApp.fetch(updatesUrl, { muteHttpExceptions: true }).getContentText());
+
+  Logger.log('Webhook: ' + JSON.stringify(webhook));
+  Logger.log('Updates: ' + JSON.stringify(updates));
+}
+
+/**
+ * Находит все чаты/группы где есть бот через getUpdates,
+ * сохраняет chat_id в PropertiesService (персистентно между запусками).
+ * Запускайте вручную из редактора Apps Script после добавления бота в новый чат.
+ */
+function discoverAndSaveChats() {
+  if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'ВСТАВЬТЕ_ТОКЕН_СЮДА') return;
+
+  var props = PropertiesService.getScriptProperties();
+  var stored = props.getProperty('tg_chat_ids');
+  var knownIds = stored ? JSON.parse(stored) : {};
+
+  // getUpdates — последние 100 обновлений
+  var url = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getUpdates?limit=100';
+  var response = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+  var result = JSON.parse(response.getContentText());
+
+  if (!result.ok) return;
+
+  result.result.forEach(function(update) {
+    var chatId = null;
+    var chatTitle = '';
+
+    if (update.message && update.message.chat) {
+      chatId = update.message.chat.id;
+      chatTitle = update.message.chat.title || update.message.chat.first_name || String(chatId);
+    } else if (update.my_chat_member && update.my_chat_member.chat) {
+      chatId = update.my_chat_member.chat.id;
+      chatTitle = update.my_chat_member.chat.title || String(chatId);
+    }
+
+    if (chatId) {
+      knownIds[String(chatId)] = chatTitle;
+    }
+  });
+
+  props.setProperty('tg_chat_ids', JSON.stringify(knownIds));
+  Logger.log('Telegram chats saved: ' + JSON.stringify(knownIds));
+}
+
+/**
+ * Отправляет сообщение во все сохранённые чаты/группы.
+ */
+function sendTelegramToAll(text) {
+  if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'ВСТАВЬТЕ_ТОКЕН_СЮДА') return;
+
+  var props = PropertiesService.getScriptProperties();
+  var stored = props.getProperty('tg_chat_ids');
+  if (!stored) return;
+
+  var knownIds = JSON.parse(stored);
+  var chatIds = Object.keys(knownIds);
+  if (chatIds.length === 0) return;
+
+  var url = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage';
+
+  chatIds.forEach(function(chatId) {
+    var payload = {
+      chat_id: chatId,
+      text: text,
+      parse_mode: 'Markdown'
+    };
+    UrlFetchApp.fetch(url, {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify(payload),
+      muteHttpExceptions: true
+    });
+  });
 }
 
 // Создать лист с заголовками если его нет
