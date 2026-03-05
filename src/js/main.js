@@ -111,7 +111,7 @@ const SECTORS = [
     icon: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
     questions: [
       'Планёрки проходят регулярно, не реже раза в неделю — на них ставятся задачи, подводятся итоги, анализируются цифры',
-      'У каждого сотрудника есть понятные зоны ответственности — прописано, кто за какие функции и бизнес-процессы отвечает',
+      'В компании есть чёткая организационная структура — понятно, кто кому подчиняется и кто принимает решения на каждом уровне',
       'Все задачи фиксируются письменно в системе управления задачами, где контролируется их выполнение',
       'Бизнес работает без постоянного участия собственника — 80-90% решений принимаются командой самостоятельно'
     ]
@@ -518,12 +518,15 @@ function getQuestionsForSector(sectorIndex) {
 function renderSector(sectorIndex) {
   const sector = SECTORS[sectorIndex];
   const questions = getQuestionsForSector(sectorIndex);
+  const sectorTitle = (sectorIndex === 2)
+    ? (state.businessType === 'goods' ? 'Производство товаров' : 'Оказание услуг')
+    : sector.fullName;
 
   let html = `
     <div class="quiz-sector fade-in">
       <h2 class="quiz-sector__title">
         ${sector.icon}
-        ${sector.fullName}
+        ${sectorTitle}
       </h2>
       <p class="quiz-sector__instruction">Оцените, насколько каждое утверждение соответствует вашему бизнесу прямо сейчас.</p>
   `;
@@ -889,10 +892,11 @@ function renderResults() {
   const labels = SECTORS.map(s => s.name);
   drawRadarChart('result-wheel', averages, labels, 250, 250, true);
 
-  // Find 2 weakest sectors
+  // Show all sectors below 7, minimum 2
   const indexed = averages.map((val, idx) => ({ val, idx }));
   indexed.sort((a, b) => a.val - b.val);
-  const weakest = indexed.slice(0, 2);
+  const belowThreshold = indexed.filter(({ val }) => val < 7);
+  const weakest = belowThreshold.length >= 2 ? belowThreshold : indexed.slice(0, 2);
 
   let weakHtml = '<h3 class="results-weak__heading">Ваши зоны роста</h3>';
   weakest.forEach(({ val, idx }) => {
