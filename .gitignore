@@ -4,3 +4,4 @@ dist/
 node_modules/
 .env
 *.zip
+src/google-apps-script.js
