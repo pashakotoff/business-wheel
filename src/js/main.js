@@ -695,6 +695,9 @@ dom.btnQuizBack.addEventListener('click', () => {
 // Start test
 dom.btnStartTest.addEventListener('click', () => {
   state.currentSector = 0;
+  state.answers = {};
+  state.businessType = null;
+  localStorage.removeItem('bw_progress');
   showScreen('quiz');
   renderSector(0);
   reachGoal('quiz_start');
