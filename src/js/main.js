@@ -1032,7 +1032,10 @@ function buildResultsUrl() {
 }
 
 function generateChecklistPDF() {
-  window.open('checklist.html', '_blank');
+  var a = document.createElement('a');
+  a.href = 'checklist.pdf';
+  a.download = 'checklist-ruchnoe-upravlenie.pdf';
+  a.click();
 }
 
 /* === SEND LEAD DATA === */

@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Результаты теста на системность бизнеса | Business Commandos</title>
+  <meta name="description" id="og-description" content="Посмотрите результаты теста на системность бизнеса и пройдите тест сами — узнайте свой индекс.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" id="og-title" content="Результаты теста на системность бизнеса | Business Commandos">
+  <meta property="og:description" id="og-desc-tag" content="Посмотрите результаты теста на системность бизнеса и пройдите тест сами — узнайте свой индекс.">
+  <meta property="og:image" content="https://audit.businesscommandos.ru/images/logos/logo-horizontal-white.png">
+  <meta property="og:url" content="https://audit.businesscommandos.ru/result.html">
+  <meta property="og:site_name" content="Business Commandos">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Результаты теста на системность бизнеса | Business Commandos">
+  <meta name="twitter:description" content="Посмотрите результаты теста на системность бизнеса и пройдите тест сами — узнайте свой индекс.">
+  <meta name="twitter:image" content="https://audit.businesscommandos.ru/images/logos/logo-horizontal-white.png">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=12">
+  <style>
+    /* =============================================
+       result.html — Shared Results Page Styles
+       ============================================= */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: #1D6DE5;
+      color: #fff;
+      padding: 8px 16px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0 0 6px 0;
+      z-index: 9999;
+    }
+    .skip-link:focus { top: 0; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    body {
+      background: #070B14;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* === HEADER === */
+    .shared-header {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .shared-header__inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .shared-header__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .shared-header__logo img {
+      width: 120px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+    .shared-header__label {
+      font-size: 13px;
+      color: #64748B;
+      margin-left: auto;
+    }
+
+    /* === HERO (First screen) === */
+    .shared-hero {
+      padding: 40px 0 32px;
+      text-align: center;
+    }
+    .shared-hero__tag {
+      display: inline-block;
+      background: rgba(29, 109, 229, 0.15);
+      border: 1px solid rgba(29, 109, 229, 0.3);
+      color: #60A5FA;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .shared-hero__title {
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #F1F5F9;
+      margin-bottom: 8px;
+    }
+    .shared-hero__title strong {
+      color: #FFFFFF;
+    }
+    .shared-hero__score {
+      font-size: 64px;
+      font-family: 'Bebas Neue', sans-serif;
+      line-height: 1;
+      margin: 16px 0 4px;
+      letter-spacing: 0.02em;
+    }
+    .shared-hero__score-label {
+      font-size: 14px;
+      color: #64748B;
+      margin-bottom: 24px;
+    }
+    .shared-hero__status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+    .shared-hero__status-badge--green {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22C55E;
+    }
+    .shared-hero__status-badge--yellow {
+      background: rgba(234, 179, 8, 0.15);
+      border: 1px solid rgba(234, 179, 8, 0.3);
+      color: #EAB308;
+    }
+    .shared-hero__status-badge--red {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #EF4444;
+    }
+    .shared-hero__status-badge svg {
+      flex-shrink: 0;
+    }
+
+    /* Radar chart wrapper */
+    .shared-chart {
+      position: relative;
+      margin: 0 auto 16px;
+      max-width: 380px;
+    }
+    .shared-chart__note {
+      font-size: 13px;
+      color: #475569;
+      margin-bottom: 32px;
+    }
+
+    /* === MAIN CTA === */
+    .shared-cta-primary {
+      background: #1D6DE5;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 32px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin: 0 auto 12px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .shared-cta-primary:hover { background: #1558C8; }
+    .shared-cta-primary:active { transform: scale(0.98); }
+    .shared-cta-note {
+      font-size: 13px;
+      color: #475569;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* === DIVIDER === */
+    .shared-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 0 0 40px;
+    }
+
+    /* === SCALE BAR === */
+    .shared-scale {
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    .shared-scale__heading {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      margin-bottom: 20px;
+    }
+    .shared-scale__track {
+      position: relative;
+      height: 8px;
+      border-radius: 100px;
+      background: linear-gradient(to right, #EF4444 0%, #EF4444 33%, #EAB308 33%, #EAB308 66%, #22C55E 66%, #22C55E 100%);
+      margin: 0 0 24px;
+    }
+    .shared-scale__marker {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 3px solid #1D6DE5;
+      box-shadow: 0 0 0 4px rgba(29, 109, 229, 0.3);
+    }
+    .shared-scale__labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #475569;
+    }
+    .shared-scale__zones {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .shared-scale__zone {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #94A3B8;
+    }
+    .shared-scale__zone-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* === SECTORS BREAKDOWN === */
+    .shared-sectors {
+      margin-bottom: 48px;
+    }
+    .shared-sectors__heading {
+      font-size: 18px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 20px;
+    }
+    .sector-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .sector-row:last-child { border-bottom: none; }
+    .sector-row__name {
+      font-size: 14px;
+      color: #CBD5E1;
+      flex: 1;
+      min-width: 0;
+    }
+    .sector-row__bar-wrap {
+      width: 100px;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .sector-row__bar {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 0.6s ease;
+    }
+    .sector-row__score {
+      font-size: 14px;
+      font-weight: 600;
+      width: 36px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* === PROVOCATION BLOCK === */
+    .shared-provocation {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px 24px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .shared-provocation__title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 8px;
+    }
+    .shared-provocation__sub {
+      font-size: 14px;
+      color: #64748B;
+      margin-bottom: 24px;
+    }
+    .shared-provocation__pains {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .shared-provocation__pains li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #94A3B8;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.5;
+    }
+    .shared-provocation__pains li:last-child { border-bottom: none; }
+    .shared-provocation__pains li::before {
+      content: '→';
+      color: #EF4444;
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* === AUTHOR BLOCK === */
+    .shared-author {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      margin-bottom: 48px;
+    }
+    .shared-author__photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .shared-author__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .shared-author__name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 4px;
+    }
+    .shared-author__bio {
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.5;
+    }
+
+    /* === FOOTER === */
+    .shared-footer {
+      padding: 24px 0 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .shared-footer a {
+      font-size: 13px;
+      color: #475569;
+      text-decoration: none;
+    }
+    .shared-footer a:hover { color: #94A3B8; }
+
+    /* === ERROR STATE === */
+    .shared-error {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .shared-error__icon {
+      color: #475569;
+      margin-bottom: 20px;
+    }
+    .shared-error__title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #94A3B8;
+      margin-bottom: 12px;
+    }
+    .shared-error__text {
+      font-size: 15px;
+      color: #475569;
+      margin-bottom: 32px;
+    }
+
+    /* === COMPARISON MODE === */
+    .compare-header {
+      text-align: center;
+      padding: 40px 0 24px;
+    }
+    .compare-header__tag {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: #C084FC;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .compare-header__title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .compare-header__sub {
+      font-size: 14px;
+      color: #64748B;
+      margin-bottom: 32px;
+    }
+    .compare-scores {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .compare-score-card {
+      text-align: center;
+      flex: 1;
+      max-width: 160px;
+    }
+    .compare-score-card__label {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .compare-score-card__label--me { color: #60A5FA; }
+    .compare-score-card__label--them { color: #94A3B8; }
+    .compare-score-card__number {
+      font-size: 52px;
+      font-family: 'Bebas Neue', sans-serif;
+      line-height: 1;
+    }
+    .compare-score-card__number--me { color: #60A5FA; }
+    .compare-score-card__number--them { color: #64748B; }
+    .compare-score-card__max {
+      font-size: 13px;
+      color: #475569;
+    }
+    .compare-vs {
+      font-size: 20px;
+      font-weight: 700;
+      color: #334155;
+      flex-shrink: 0;
+    }
+    .compare-legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+    .compare-legend__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #94A3B8;
+    }
+    .compare-legend__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .compare-legend__dot--me   { background: #60A5FA; }
+    .compare-legend__dot--them { background: #475569; }
+
+    /* Compare sectors table */
+    .compare-sectors { margin-bottom: 48px; }
+    .compare-sectors__heading {
+      font-size: 18px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .compare-row {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row__name {
+      font-size: 13px;
+      color: #64748B;
+      margin-bottom: 10px;
+    }
+    .compare-row__bars {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .compare-row__bar-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-row__bar-label {
+      font-size: 12px;
+      font-weight: 500;
+      width: 30px;
+      flex-shrink: 0;
+    }
+    .compare-row__bar-label--me   { color: #60A5FA; }
+    .compare-row__bar-label--them { color: #64748B; }
+    .compare-row__bar-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .compare-row__bar-fill {
+      height: 100%;
+      border-radius: 100px;
+    }
+    .compare-row__bar-fill--me   { background: #60A5FA; }
+    .compare-row__bar-fill--them { background: #475569; }
+    .compare-row__score {
+      font-size: 13px;
+      font-weight: 600;
+      width: 32px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .compare-row__score--me   { color: #60A5FA; }
+    .compare-row__score--them { color: #64748B; }
+    .compare-row__delta {
+      font-size: 12px;
+      font-weight: 600;
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .compare-row__delta--pos { color: #22C55E; }
+    .compare-row__delta--neg { color: #EF4444; }
+    .compare-row__delta--zero { color: #475569; }
+
+    /* Share challenge block */
+    .challenge-block {
+      text-align: center;
+      padding: 32px 24px;
+      background: rgba(29, 109, 229, 0.08);
+      border: 1px solid rgba(29, 109, 229, 0.2);
+      border-radius: 20px;
+      margin-bottom: 48px;
+    }
+    .challenge-block__eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #60A5FA;
+      margin-bottom: 12px;
+    }
+    .challenge-block__title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #F1F5F9;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .challenge-block__sub {
+      font-size: 14px;
+      color: #64748B;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .btn-challenge {
+      background: #1D6DE5;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 380px;
+      display: block;
+      margin: 0 auto 10px;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+    .btn-challenge:hover { background: #1558C8; }
+    .btn-challenge:active { transform: scale(0.98); }
+    .btn-challenge--copied {
+      background: #22C55E !important;
+    }
+    .challenge-block__hint {
+      font-size: 12px;
+      color: #334155;
+    }
+
+    /* Mini diagnostic form */
+    .diag-mini-form {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 12px;
+    }
+    .diag-mini-form__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 6px;
+    }
+    .diag-mini-form__sub {
+      font-size: 13px;
+      color: #64748B;
+      margin-bottom: 20px;
+    }
+    .diag-mini-form__fields {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .diag-mini-form__input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #F1F5F9;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .diag-mini-form__input::placeholder { color: #475569; }
+    .diag-mini-form__input:focus { border-color: rgba(96,165,250,0.5); }
+    .diag-mini-form__note {
+      font-size: 12px;
+      color: #475569;
+      margin-top: 10px;
+    }
+    .diag-mini-success {
+      text-align: center;
+      padding: 24px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .diag-mini-success__icon { font-size: 32px; margin-bottom: 8px; }
+    .diag-mini-success__text {
+      font-size: 15px;
+      color: #86EFAC;
+      font-weight: 500;
+    }
+
+    /* Winner banner */
+    .compare-winner {
+      text-align: center;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 32px;
+    }
+    .compare-winner--me {
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+    .compare-winner--them {
+      background: rgba(71, 85, 105, 0.2);
+      border: 1px solid rgba(71, 85, 105, 0.3);
+    }
+    .compare-winner--tie {
+      background: rgba(234, 179, 8, 0.1);
+      border: 1px solid rgba(234, 179, 8, 0.2);
+    }
+    .compare-winner__emoji { font-size: 32px; margin-bottom: 8px; }
+    .compare-winner__text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #F1F5F9;
+      margin-bottom: 4px;
+    }
+    .compare-winner__sub { font-size: 13px; color: #64748B; }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeInUp 0.5s ease forwards; }
+    .animate-in-delay { animation: fadeInUp 0.5s ease 0.15s both; }
+    .animate-in-delay2 { animation: fadeInUp 0.5s ease 0.3s both; }
+
+    /* === COLORS === */
+    .color-green { color: #22C55E; }
+    .color-yellow { color: #EAB308; }
+    .color-red { color: #EF4444; }
+    .bg-green { background: #22C55E; }
+    .bg-yellow { background: #EAB308; }
+    .bg-red { background: #EF4444; }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Перейти к содержимому</a>
+
+  <!-- HEADER -->
+  <header class="shared-header">
+    <div class="container shared-header__inner">
+      <a href="/" class="shared-header__logo" aria-label="Business Commandos — перейти на главную">
+        <img src="images/logos/logo-horizontal-white.png" alt="Business Commandos" width="120" height="48">
+      </a>
+      <span class="shared-header__label">Тест на системность бизнеса</span>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT (filled by JS) -->
+  <main id="main-content">
+    <h1 class="visually-hidden" id="page-h1">Результаты теста на системность бизнеса</h1>
+    <div class="container">
+      <div class="shared-error" id="loading-state">
+        <p style="color:#475569;font-size:14px;">Загружаем результаты…</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="shared-footer">
+    <div class="container">
+      <a href="/">Пройти тест самостоятельно →</a>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+
+    /* =============================================
+       result.html — Shared Results Page JS
+       ============================================= */
+
+    const SECTORS = [
+      { id: 'sales',      name: 'Продажи',     fullName: 'Продажи' },
+      { id: 'marketing',  name: 'Маркетинг',   fullName: 'Маркетинг' },
+      { id: 'production', name: 'Производство', fullName: 'Производство / Оказание услуг' },
+      { id: 'finance',    name: 'Финансы',      fullName: 'Финансы' },
+      { id: 'hr',         name: 'Кадры',        fullName: 'Кадры: найм и адаптация' },
+      { id: 'quality',    name: 'Качество',     fullName: 'Контроль качества' },
+      { id: 'management', name: 'Управление',   fullName: 'Общая система управления' },
+      { id: 'strategy',   name: 'Стратегия',    fullName: 'Стратегия и планирование' }
+    ];
+
+    /* --- Parse URL params --- */
+    function parseParams() {
+      const p = new URLSearchParams(window.location.search);
+
+      // Demo shortcuts
+      if (p.get('demo') === 'shared') {
+        return { name: 'Павел Котов', scores: [7, 4, 8, 3, 6, 5, 5, 7], btype: 'services', myScores: null, myName: 'Вы' };
+      }
+      if (p.get('demo') === 'challenge') {
+        return { name: 'Павел Котов', scores: [7, 4, 8, 3, 6, 5, 5, 7], btype: 'services', myScores: [6, 5, 7, 4, 8, 3, 6, 5], myName: 'Алексей' };
+      }
+
+      const n = p.get('n');
+      const s = p.get('s');
+      const b = p.get('b');
+      const my = p.get('my');
+      const myName = p.get('myname');
+
+      if (!n || !s) return null;
+
+      const scores = s.split(',').map(Number);
+      if (scores.length !== 8 || scores.some(v => isNaN(v) || v < 1 || v > 10)) return null;
+
+      let myScores = null;
+      if (my) {
+        const parsed = my.split(',').map(Number);
+        if (parsed.length === 8 && !parsed.some(v => isNaN(v) || v < 1 || v > 10)) {
+          myScores = parsed;
+        }
+      }
+
+      return {
+        name: decodeURIComponent(n),
+        scores: scores,
+        btype: b || 'services',
+        myScores: myScores,
+        myName: myName ? decodeURIComponent(myName) : 'Вы'
+      };
+    }
+
+    /* --- Score helpers --- */
+    function totalScore(scores) {
+      return scores.reduce((a, b) => a + b, 0);
+    }
+
+    function getStatusInfo(total) {
+      if (total >= 60) return { label: 'Системный бизнес', cls: 'green', icon: '✓' };
+      if (total >= 35) return { label: 'Бизнес на ручном управлении', cls: 'yellow', icon: '!' };
+      return { label: 'Бизнес в режиме выживания', cls: 'red', icon: '✗' };
+    }
+
+    function sectorColor(score) {
+      if (score <= 4) return { color: '#EF4444', cls: 'color-red', bg: 'bg-red' };
+      if (score <= 7) return { color: '#EAB308', cls: 'color-yellow', bg: 'bg-yellow' };
+      return { color: '#22C55E', cls: 'color-green', bg: 'bg-green' };
+    }
+
+    /* --- Radar Chart (copied from main.js) --- */
+    function drawRadarChart(svgId, values, labels, cx, cy) {
+      const svg = document.getElementById(svgId);
+      if (!svg) return;
+
+      const maxVal = 10;
+      const levels = [2, 4, 6, 8, 10];
+      const numAxes = values.length;
+      const angleStep = (2 * Math.PI) / numAxes;
+      const startAngle = -Math.PI / 2;
+      const maxRadius = Math.min(cx, cy) - 50;
+
+      let html = '';
+
+      levels.forEach(level => {
+        const pts = [];
+        for (let i = 0; i < numAxes; i++) {
+          const a = startAngle + i * angleStep;
+          const r = (level / maxVal) * maxRadius;
+          pts.push(`${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`);
+        }
+        html += `<polygon points="${pts.join(' ')}" fill="none" stroke="#1E3A5F" stroke-opacity="0.5" stroke-width="1"/>`;
+      });
+
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        html += `<line x1="${cx}" y1="${cy}" x2="${cx + maxRadius * Math.cos(a)}" y2="${cy + maxRadius * Math.sin(a)}" stroke="#1E3A5F" stroke-opacity="0.5" stroke-width="1"/>`;
+      }
+
+      const dataPoints = [];
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const r = (values[i] / maxVal) * maxRadius;
+        dataPoints.push(`${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`);
+      }
+
+      const avg = values.reduce((a, b) => a + b, 0) / values.length;
+      let fillColor, strokeColor;
+      if (avg <= 4) { fillColor = 'rgba(239,68,68,0.25)'; strokeColor = '#EF4444'; }
+      else if (avg <= 7) { fillColor = 'rgba(234,179,8,0.25)'; strokeColor = '#EAB308'; }
+      else { fillColor = 'rgba(34,197,94,0.25)'; strokeColor = '#22C55E'; }
+
+      html += `<polygon points="${dataPoints.join(' ')}" fill="${fillColor}" stroke="${strokeColor}" stroke-width="2" stroke-opacity="0.9"/>`;
+
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const r = (values[i] / maxVal) * maxRadius;
+        const px = cx + r * Math.cos(a);
+        const py = cy + r * Math.sin(a);
+        const dc = values[i] <= 4 ? '#EF4444' : values[i] <= 7 ? '#EAB308' : '#22C55E';
+        html += `<circle cx="${px}" cy="${py}" r="5" fill="${dc}" stroke="#070B14" stroke-width="2"/>`;
+        html += `<line x1="${cx}" y1="${cy}" x2="${cx + maxRadius * Math.cos(a)}" y2="${cy + maxRadius * Math.sin(a)}" stroke="${dc}" stroke-opacity="0.3" stroke-width="2"/>`;
+      }
+
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const labelR = maxRadius + 28;
+        const lx = cx + labelR * Math.cos(a);
+        const ly = cy + labelR * Math.sin(a);
+        let anchor = 'middle';
+        if (Math.cos(a) < -0.1) anchor = 'end';
+        else if (Math.cos(a) > 0.1) anchor = 'start';
+        const dc = values[i] <= 4 ? '#EF4444' : values[i] <= 7 ? '#EAB308' : '#22C55E';
+        html += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" dominant-baseline="central" fill="${dc}" font-family="Inter,sans-serif" font-size="12" font-weight="500">${labels[i]}</text>`;
+        html += `<text x="${lx}" y="${ly + 14}" text-anchor="${anchor}" dominant-baseline="central" fill="#94A3B8" font-family="Inter,sans-serif" font-size="11">${values[i].toFixed(1)}</text>`;
+      }
+
+      svg.innerHTML = html;
+    }
+
+    /* --- Dual Radar Chart (two overlaid polygons) --- */
+    function drawDualRadarChart(svgId, valuesA, valuesB, labels, cx, cy) {
+      const svg = document.getElementById(svgId);
+      if (!svg) return;
+
+      const maxVal = 10;
+      const levels = [2, 4, 6, 8, 10];
+      const numAxes = valuesA.length;
+      const angleStep = (2 * Math.PI) / numAxes;
+      const startAngle = -Math.PI / 2;
+      const maxRadius = Math.min(cx, cy) - 50;
+
+      let html = '';
+
+      // Grid
+      levels.forEach(level => {
+        const pts = [];
+        for (let i = 0; i < numAxes; i++) {
+          const a = startAngle + i * angleStep;
+          const r = (level / maxVal) * maxRadius;
+          pts.push(`${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`);
+        }
+        html += `<polygon points="${pts.join(' ')}" fill="none" stroke="#1E3A5F" stroke-opacity="0.5" stroke-width="1"/>`;
+      });
+
+      // Axes
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        html += `<line x1="${cx}" y1="${cy}" x2="${cx + maxRadius * Math.cos(a)}" y2="${cy + maxRadius * Math.sin(a)}" stroke="#1E3A5F" stroke-opacity="0.4" stroke-width="1"/>`;
+      }
+
+      // Polygon B (them) — drawn first, behind
+      const ptsB = [];
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const r = (valuesB[i] / maxVal) * maxRadius;
+        ptsB.push(`${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`);
+      }
+      html += `<polygon points="${ptsB.join(' ')}" fill="rgba(71,85,105,0.2)" stroke="#475569" stroke-width="2" stroke-opacity="0.8" stroke-dasharray="5,3"/>`;
+
+      // Polygon A (me) — drawn on top
+      const ptsA = [];
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const r = (valuesA[i] / maxVal) * maxRadius;
+        ptsA.push(`${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`);
+      }
+      html += `<polygon points="${ptsA.join(' ')}" fill="rgba(96,165,250,0.2)" stroke="#60A5FA" stroke-width="2" stroke-opacity="0.9"/>`;
+
+      // Dots: B (them)
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const r = (valuesB[i] / maxVal) * maxRadius;
+        html += `<circle cx="${cx + r * Math.cos(a)}" cy="${cy + r * Math.sin(a)}" r="4" fill="#475569" stroke="#070B14" stroke-width="2"/>`;
+      }
+      // Dots: A (me) — on top
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const r = (valuesA[i] / maxVal) * maxRadius;
+        html += `<circle cx="${cx + r * Math.cos(a)}" cy="${cy + r * Math.sin(a)}" r="5" fill="#60A5FA" stroke="#070B14" stroke-width="2"/>`;
+      }
+
+      // Labels
+      for (let i = 0; i < numAxes; i++) {
+        const a = startAngle + i * angleStep;
+        const labelR = maxRadius + 28;
+        const lx = cx + labelR * Math.cos(a);
+        const ly = cy + labelR * Math.sin(a);
+        let anchor = 'middle';
+        if (Math.cos(a) < -0.1) anchor = 'end';
+        else if (Math.cos(a) > 0.1) anchor = 'start';
+        const diff = valuesA[i] - valuesB[i];
+        const labelColor = diff > 0 ? '#22C55E' : diff < 0 ? '#EF4444' : '#94A3B8';
+        html += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" dominant-baseline="central" fill="#94A3B8" font-family="Inter,sans-serif" font-size="12" font-weight="500">${labels[i]}</text>`;
+        const sign = diff > 0 ? '+' : '';
+        html += `<text x="${lx}" y="${ly + 14}" text-anchor="${anchor}" dominant-baseline="central" fill="${labelColor}" font-family="Inter,sans-serif" font-size="11" font-weight="600">${sign}${diff.toFixed(1)}</text>`;
+      }
+
+      svg.innerHTML = html;
+    }
+
+    /* --- Render COMPARISON page --- */
+    function renderComparison(data) {
+      const { name, scores, btype, myScores, myName } = data;
+      const myTotal = totalScore(myScores);
+      const theirTotal = totalScore(scores);
+      const diff = myTotal - theirTotal;
+      const labels = SECTORS.map(s => s.name);
+      const myStatus = getStatusInfo(myTotal);
+
+      document.title = `${escHtml(myName)} — результаты теста на системность | Business Commandos`;
+
+      // --- Winner banner ---
+      let winnerHtml;
+      if (Math.abs(diff) < 2) {
+        winnerHtml = `
+          <div class="compare-winner compare-winner--tie">
+            <div class="compare-winner__emoji">🤝</div>
+            <div class="compare-winner__text">Ваши результаты почти одинаковые</div>
+            <div class="compare-winner__sub">Разница всего ${Math.abs(diff).toFixed(1)} балла — вы на одном уровне системности</div>
+          </div>`;
+      } else if (diff > 0) {
+        winnerHtml = `
+          <div class="compare-winner compare-winner--me">
+            <div class="compare-winner__emoji">🏆</div>
+            <div class="compare-winner__text">Ваш бизнес системнее на ${diff.toFixed(1)} балла</div>
+            <div class="compare-winner__sub">Вы обогнали ${escHtml(name)}. Посмотрите, по каким секторам разрыв больше всего.</div>
+          </div>`;
+      } else {
+        winnerHtml = `
+          <div class="compare-winner compare-winner--them">
+            <div class="compare-winner__emoji">💡</div>
+            <div class="compare-winner__text">${escHtml(name)} системнее на ${Math.abs(diff).toFixed(1)} балла</div>
+            <div class="compare-winner__sub">Посмотрите, в каких секторах у вас просадка — там точки роста.</div>
+          </div>`;
+      }
+
+      // --- Sector comparison table ---
+      const sectorsHtml = SECTORS.map((sector, i) => {
+        const myS = myScores[i];
+        const theirS = scores[i];
+        const delta = myS - theirS;
+        const sign = delta > 0 ? '+' : '';
+        const deltaClass = delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero';
+        const sectorLabel = (sector.id === 'production' && btype === 'services') ? 'Оказание услуг' : sector.fullName;
+        return `
+          <div class="compare-row">
+            <div class="compare-row__name">${escHtml(sectorLabel)}</div>
+            <div class="compare-row__bars">
+              <div class="compare-row__bar-line">
+                <span class="compare-row__bar-label compare-row__bar-label--me">${escHtml(myName.slice(0,4))}</span>
+                <div class="compare-row__bar-track">
+                  <div class="compare-row__bar-fill compare-row__bar-fill--me" style="width:${(myS/10)*100}%"></div>
+                </div>
+                <span class="compare-row__score compare-row__score--me">${myS.toFixed(1)}</span>
+                <span class="compare-row__delta compare-row__delta--${deltaClass}">${sign}${delta.toFixed(1)}</span>
+              </div>
+              <div class="compare-row__bar-line">
+                <span class="compare-row__bar-label compare-row__bar-label--them">${escHtml(name.slice(0,4))}</span>
+                <div class="compare-row__bar-track">
+                  <div class="compare-row__bar-fill compare-row__bar-fill--them" style="width:${(theirS/10)*100}%"></div>
+                </div>
+                <span class="compare-row__score compare-row__score--them">${theirS.toFixed(1)}</span>
+                <span class="compare-row__delta" style="width:40px"></span>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      // --- My weak sectors (2 worst) ---
+      const myWeakIdxs = myScores
+        .map((s, i) => ({ s, i }))
+        .sort((a, b) => a.s - b.s)
+        .slice(0, 2);
+
+      const myWeakHtml = myWeakIdxs.map(({ s, i }) => {
+        const col = sectorColor(s);
+        const sectorLabel = (SECTORS[i].id === 'production' && btype === 'services') ? 'Оказание услуг' : SECTORS[i].fullName;
+        return `
+          <div class="sector-row">
+            <span class="sector-row__name">${escHtml(sectorLabel)}</span>
+            <div class="sector-row__bar-wrap">
+              <div class="sector-row__bar ${col.bg}" style="width:${(s/10)*100}%"></div>
+            </div>
+            <span class="sector-row__score ${col.cls}">${s.toFixed(1)}</span>
+          </div>`;
+      }).join('');
+
+      // --- Dynamic share text ---
+      let sharePromo;
+      if (diff > 5) {
+        sharePromo = `У меня ${myTotal.toFixed(0)}/80. Сравним, у кого больше?`;
+      } else if (diff < -5) {
+        sharePromo = `У меня ${myTotal.toFixed(0)}/80. Думаю, ты наберёшь больше — проверь.`;
+      } else {
+        sharePromo = `У меня ${myTotal.toFixed(0)}/80. Интересно, у тебя больше или меньше?`;
+      }
+
+      const main = document.getElementById('main-content');
+      main.innerHTML = `
+        <div class="container">
+
+          <!-- ══ БЛОК 1: МОИ ЛИЧНЫЕ РЕЗУЛЬТАТЫ ══ -->
+          <div class="shared-hero animate-in">
+            <div class="shared-hero__tag">Ваши результаты</div>
+            <h1 class="shared-hero__title">
+              Индекс системности <strong>${escHtml(myName)}</strong>
+            </h1>
+
+            <div class="shared-hero__score ${myStatus.cls === 'green' ? 'color-green' : myStatus.cls === 'yellow' ? 'color-yellow' : 'color-red'}">
+              ${myTotal.toFixed(1)}
+            </div>
+            <div class="shared-hero__score-label">из 80 возможных баллов</div>
+
+            <div class="shared-hero__status-badge shared-hero__status-badge--${myStatus.cls}">
+              ${myStatus.label}
+            </div>
+
+            <div class="shared-chart">
+              <svg id="my-radar" viewBox="0 0 380 300" width="100%" role="img" aria-label="Моё колесо баланса"></svg>
+            </div>
+            <p class="shared-chart__note">Чем ровнее колесо — тем быстрее едет бизнес</p>
+          </div>
+
+          <!-- Слабые зоны -->
+          <div class="shared-sectors" style="margin-bottom:32px">
+            <h2 class="shared-sectors__heading" style="font-size:16px;margin-bottom:12px">Ваши зоны роста</h2>
+            ${myWeakHtml}
+          </div>
+
+          <!-- CTA диагностика — мини-форма -->
+          <div class="diag-mini-form" id="diag-mini-form">
+            <h3 class="diag-mini-form__title">Записаться на бесплатный разбор</h3>
+            <p class="diag-mini-form__sub">30 минут с Павлом Котовым · Разберёт ваши результаты лично</p>
+            <div class="diag-mini-form__fields">
+              <input type="text" id="diag-mini-name" placeholder="Ваше имя" class="diag-mini-form__input">
+              <input type="tel" id="diag-mini-phone" placeholder="+7 (999) 123-45-67" class="diag-mini-form__input">
+              <button type="button" id="diag-mini-submit" class="shared-cta-primary" style="margin:0">
+                Записаться →
+              </button>
+            </div>
+            <p class="diag-mini-form__note">Без спама. Только звонок для записи на сессию.</p>
+          </div>
+          <div class="diag-mini-success" id="diag-mini-success" hidden>
+            <div class="diag-mini-success__icon">✓</div>
+            <div class="diag-mini-success__text">Заявка отправлена! Павел свяжется с вами в ближайшее время.</div>
+          </div>
+
+          <!-- Challenge block — сразу после записи -->
+          <div class="challenge-block" id="challenge-block-top">
+            <div class="challenge-block__eyebrow">Вирусный вызов</div>
+            <div class="challenge-block__title">Сравним, у кого больше?</div>
+            <div class="challenge-block__sub">
+              Отправь ссылку коллеге или партнёру — он пройдёт тест и сразу увидит, чей бизнес системнее.
+            </div>
+            <button class="btn-challenge" id="btn-challenge-share">
+              Бросить вызов →
+            </button>
+            <div class="challenge-block__hint">Ссылка скопируется в буфер обмена</div>
+          </div>
+
+          <hr class="shared-divider">
+
+          <!-- ══ БЛОК 2: СРАВНЕНИЕ С ${escHtml(name).toUpperCase()} ══ -->
+          <div class="compare-header" style="padding-top:0">
+            <div class="compare-header__tag">Сравнение с ${escHtml(name)}</div>
+            <h2 class="compare-header__title">${escHtml(myName)} vs ${escHtml(name)}</h2>
+            <p class="compare-header__sub">Синяя зона — вы, серая пунктирная — ${escHtml(name)}. Цифры на осях показывают разницу.</p>
+
+            <div class="compare-scores">
+              <div class="compare-score-card">
+                <div class="compare-score-card__label compare-score-card__label--me">${escHtml(myName)}</div>
+                <div class="compare-score-card__number compare-score-card__number--me">${myTotal.toFixed(1)}</div>
+                <div class="compare-score-card__max">из 80</div>
+              </div>
+              <div class="compare-vs">VS</div>
+              <div class="compare-score-card">
+                <div class="compare-score-card__label compare-score-card__label--them">${escHtml(name)}</div>
+                <div class="compare-score-card__number compare-score-card__number--them">${theirTotal.toFixed(1)}</div>
+                <div class="compare-score-card__max">из 80</div>
+              </div>
+            </div>
+
+            <div class="compare-legend">
+              <span class="compare-legend__item">
+                <span class="compare-legend__dot compare-legend__dot--me"></span>${escHtml(myName)} (вы)
+              </span>
+              <span class="compare-legend__item">
+                <span class="compare-legend__dot compare-legend__dot--them"></span>${escHtml(name)}
+              </span>
+            </div>
+
+            <div class="shared-chart" style="max-width:400px">
+              <svg id="compare-radar" viewBox="0 0 400 320" width="100%" role="img" aria-label="Сравнение результатов"></svg>
+            </div>
+          </div>
+
+          ${winnerHtml}
+
+          <div class="compare-sectors">
+            <h2 class="compare-sectors__heading">По секторам</h2>
+            ${sectorsHtml}
+          </div>
+
+          <!-- Автор -->
+          <div class="shared-author">
+            <div class="shared-author__photo">
+              <img src="images/pavel-kotov.jpg" alt="Павел Котов" width="64" height="64" loading="lazy">
+            </div>
+            <div>
+              <div class="shared-author__name">Павел Котов</div>
+              <p class="shared-author__bio">Основатель Business Commandos. 7+ лет внедряет системы управления в бизнесах с оборотом от 30 до 500 млн рублей.</p>
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      // Draw charts
+      drawRadarChart('my-radar', myScores, labels, 190, 150);
+      drawDualRadarChart('compare-radar', myScores, scores, labels, 200, 160);
+
+      // Challenge button — только копирование
+      const myShareUrl = `${location.origin}${location.pathname}?n=${encodeURIComponent(myName)}&s=${myScores.map(v => v.toFixed(1)).join(',')}&b=${btype}`;
+      const shareMsg = `${sharePromo} → ${myShareUrl}`;
+
+      document.getElementById('btn-challenge-share').addEventListener('click', function() {
+        const btn = this;
+        navigator.clipboard.writeText(shareMsg).then(() => {
+          btn.textContent = 'Скопировано!';
+          btn.classList.add('btn-challenge--copied');
+          setTimeout(() => {
+            btn.textContent = 'Бросить вызов →';
+            btn.classList.remove('btn-challenge--copied');
+          }, 2500);
+        }).catch(() => {});
+      });
+
+      // Mini-form — записаться на разбор
+      const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby25XvUx7zaRCIomKl55OxYix6BfU9aDSxv3YPM3i11HaHu5RAFa_npxOEOvgeHkd2r6A/exec';
+      document.getElementById('diag-mini-submit').addEventListener('click', function() {
+        const nameVal = document.getElementById('diag-mini-name').value.trim();
+        const phoneVal = document.getElementById('diag-mini-phone').value.trim();
+        if (!nameVal) { document.getElementById('diag-mini-name').focus(); return; }
+        if (!phoneVal) { document.getElementById('diag-mini-phone').focus(); return; }
+
+        this.textContent = 'Отправляем...';
+        this.disabled = true;
+
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'diagnostic_request',
+            name: nameVal,
+            phone: phoneVal,
+            email: '',
+            preferredContact: '',
+            source: 'result_page',
+            referredBy: name
+          })
+        }).catch(() => {});
+
+        document.getElementById('diag-mini-form').hidden = true;
+        document.getElementById('diag-mini-success').hidden = false;
+      });
+    }
+
+    function copyAndConfirm(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Скопировано!';
+        btn.classList.add('btn-challenge--copied');
+        setTimeout(() => {
+          btn.textContent = 'Бросить вызов →';
+          btn.classList.remove('btn-challenge--copied');
+        }, 2500);
+      }).catch(() => {});
+    }
+
+    /* --- Render page --- */
+    function render(data) {
+      const { name, scores, btype } = data;
+      const total = totalScore(scores);
+      const status = getStatusInfo(total);
+      const labels = SECTORS.map(s => s.name);
+
+      // Update page title
+      document.title = `${name} — результаты теста на системность | Business Commandos`;
+
+      const scalePercent = ((total - 8) / (80 - 8)) * 100;
+
+      // Find worst 3 sectors
+      const ranked = scores.map((score, i) => ({ score, idx: i }))
+                           .sort((a, b) => a.score - b.score);
+
+      const main = document.getElementById('main-content');
+      main.innerHTML = `
+        <div class="container">
+
+          <!-- HERO -->
+          <div class="shared-hero animate-in">
+            <div class="shared-hero__tag">Результаты теста</div>
+            <h1 class="shared-hero__title">
+              <strong>${escHtml(name)}</strong> оценил системность своего бизнеса
+            </h1>
+
+            <div class="shared-hero__score ${status.cls === 'green' ? 'color-green' : status.cls === 'yellow' ? 'color-yellow' : 'color-red'}">
+              ${total.toFixed(1)}
+            </div>
+            <div class="shared-hero__score-label">из 80 возможных баллов</div>
+
+            <div class="shared-hero__status-badge shared-hero__status-badge--${status.cls}">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                ${status.cls === 'green'
+                  ? '<path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>'
+                  : '<path d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm0 3a.75.75 0 0 0-.75.75v3.5c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-3.5A.75.75 0 0 0 8 4zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>'}
+              </svg>
+              ${status.label}
+            </div>
+
+            <div class="shared-chart">
+              <svg id="result-radar" viewBox="0 0 380 300" width="100%" role="img" aria-label="Колесо Баланса Бизнеса — результат ${escHtml(name)}"></svg>
+            </div>
+            <p class="shared-chart__note">Чем ровнее колесо — тем быстрее едет бизнес</p>
+
+            <a href="/?ref_n=${encodeURIComponent(name)}&ref_s=${encodeURIComponent(scores.map(v => v.toFixed(1)).join(','))}&ref_b=${btype}" class="shared-cta-primary animate-in-delay">
+              Пройти тест и сравнить свой результат →
+            </a>
+            <p class="shared-cta-note">Бесплатно · 32 вопроса · 3 минуты</p>
+          </div>
+
+          <hr class="shared-divider">
+
+          <!-- SCALE BAR -->
+          <div class="shared-scale animate-in-delay">
+            <div class="shared-scale__heading">Где находится ${escHtml(name)} на шкале системности</div>
+            <div class="shared-scale__track">
+              <div class="shared-scale__marker" style="left: ${Math.min(Math.max(scalePercent, 2), 98)}%"></div>
+            </div>
+            <div class="shared-scale__labels">
+              <span>8 — Выживание</span>
+              <span>44 — Середина</span>
+              <span>80 — Система</span>
+            </div>
+            <div class="shared-scale__zones">
+              <span class="shared-scale__zone">
+                <span class="shared-scale__zone-dot bg-red"></span>
+                8–34: Ручное управление
+              </span>
+              <span class="shared-scale__zone">
+                <span class="shared-scale__zone-dot bg-yellow"></span>
+                35–59: Частичная система
+              </span>
+              <span class="shared-scale__zone">
+                <span class="shared-scale__zone-dot bg-green"></span>
+                60–80: Системный бизнес
+              </span>
+            </div>
+          </div>
+
+          <hr class="shared-divider">
+
+          <!-- SECTOR BREAKDOWN -->
+          <div class="shared-sectors">
+            <h2 class="shared-sectors__heading">Результаты по секторам</h2>
+            ${SECTORS.map((sector, i) => {
+              const sc = scores[i];
+              const col = sectorColor(sc);
+              const barWidth = (sc / 10) * 100;
+              const sectorLabel = (sector.id === 'production' && btype === 'services')
+                ? 'Оказание услуг'
+                : sector.fullName;
+              return `
+                <div class="sector-row">
+                  <span class="sector-row__name">${escHtml(sectorLabel)}</span>
+                  <div class="sector-row__bar-wrap">
+                    <div class="sector-row__bar ${col.bg}" style="width:${barWidth}%"></div>
+                  </div>
+                  <span class="sector-row__score ${col.cls}">${sc.toFixed(1)}</span>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <hr class="shared-divider">
+
+          <!-- PROVOCATION BLOCK -->
+          <div class="shared-provocation">
+            <h2 class="shared-provocation__title">А что покажет ваш бизнес?</h2>
+            <p class="shared-provocation__sub">Узнайте свой индекс системности — пройдите тот же тест</p>
+            <ul class="shared-provocation__pains">
+              <li>Без вас всё останавливается или замедляется</li>
+              <li>Сотрудники постоянно приходят с вопросами, на которые вы уже отвечали</li>
+              <li>Прибыль есть, но деньги непонятно куда уходят</li>
+              <li>Рост выручки не приносит больше свободного времени</li>
+              <li>Вы не можете уйти в отпуск без потерь для бизнеса</li>
+              <li>Планы есть, но они регулярно срываются</li>
+            </ul>
+            <a href="/?ref_n=${encodeURIComponent(name)}&ref_s=${encodeURIComponent(scores.map(v => v.toFixed(1)).join(','))}&ref_b=${btype}" class="shared-cta-primary">
+              Пройти бесплатный тест — 3 минуты →
+            </a>
+            <p class="shared-cta-note" style="margin-top:12px;">32 вопроса · 8 секторов · Мгновенный результат</p>
+          </div>
+
+          <!-- AUTHOR -->
+          <div class="shared-author">
+            <div class="shared-author__photo">
+              <img src="images/pavel-kotov.jpg" alt="Павел Котов" width="64" height="64" loading="lazy">
+            </div>
+            <div>
+              <div class="shared-author__name">Павел Котов</div>
+              <p class="shared-author__bio">Основатель Business Commandos. 7+ лет внедряет системы управления в бизнесах с оборотом от 30 до 500 млн рублей. Более 1200 предпринимателей прошли этот тест.</p>
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      // Draw radar chart after DOM is ready
+      drawRadarChart('result-radar', scores, labels, 190, 150);
+    }
+
+    function renderError() {
+      document.getElementById('loading-state').innerHTML = `
+        <div class="shared-error">
+          <div class="shared-error__icon">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <h1 class="shared-error__title">Ссылка недействительна</h1>
+          <p class="shared-error__text">Попросите отправителя поделиться результатами ещё раз,<br>или пройдите тест самостоятельно.</p>
+          <a href="/" class="shared-cta-primary" style="max-width:320px">Пройти тест бесплатно →</a>
+        </div>
+      `;
+    }
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function updateOGTags(name, total, btype) {
+      const title = name + ' — индекс системности ' + Math.round(total) + '/80 | Business Commandos';
+      const desc = name + ' прошёл тест на системность бизнеса. Индекс: ' + Math.round(total) + ' из 80. Пройди тест и сравни свои результаты.';
+      document.title = title;
+      const ogTitle = document.getElementById('og-title');
+      const ogDesc = document.getElementById('og-desc-tag');
+      const metaDesc = document.getElementById('og-description');
+      if (ogTitle) ogTitle.setAttribute('content', title);
+      if (ogDesc) ogDesc.setAttribute('content', desc);
+      if (metaDesc) metaDesc.setAttribute('content', desc);
+    }
+
+    /* --- INIT --- */
+    const data = parseParams();
+    if (data) {
+      updateOGTags(data.name, totalScore(data.scores), data.btype);
+      if (data.myScores) {
+        renderComparison(data);
+      } else {
+        render(data);
+      }
+    } else {
+      renderError();
+    }
+  </script>
+
+</body>
+</html>

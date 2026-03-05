@@ -1172,6 +1172,17 @@ h4 {
   margin-bottom: 16px;
 }
 
+.results-share__hint {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  background: rgba(29, 109, 229, 0.08);
+  border: 1px solid rgba(29, 109, 229, 0.25);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  line-height: 1.5;
+}
+
 /* Secondary CTA */
 .results-secondary {
   text-align: center;
@@ -1393,5 +1404,127 @@ h4 {
   .results-body {
     max-width: var(--container-max-wide);
     margin-inline: auto;
+  }
+}
+
+/* ===================================================================
+   PRINT CHECKLIST
+   =================================================================== */
+
+#pdf-checklist {
+  display: none;
+}
+
+@media print {
+  body > *:not(#pdf-checklist) {
+    display: none !important;
+  }
+
+  #pdf-checklist {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    padding: 20mm 16mm;
+    background: #fff;
+  }
+
+  .pdf-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+    border-bottom: 3px solid #F59E0B;
+    padding-bottom: 10px;
+  }
+
+  .pdf-logo-bc {
+    font-size: 22px;
+    font-weight: 900;
+    color: #F59E0B;
+  }
+
+  .pdf-logo-text {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #888;
+    text-transform: uppercase;
+  }
+
+  .pdf-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #111;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .pdf-subtitle {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 12px;
+  }
+
+  .pdf-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin-bottom: 14px;
+  }
+
+  .pdf-items {
+    padding-left: 22px;
+    margin-bottom: 18px;
+  }
+
+  .pdf-items li {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  .pdf-alert {
+    background: #FEF3C7;
+    border-left: 4px solid #F59E0B;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .pdf-cta {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+
+  .pdf-cta__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 6px;
+  }
+
+  .pdf-cta__text {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .pdf-cta__url {
+    font-size: 12px;
+    font-weight: 700;
+    color: #F59E0B;
+  }
+
+  .pdf-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #aaa;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
   }
 }
