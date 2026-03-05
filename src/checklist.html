@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>10 признаков бизнеса на ручном управлении — Business Commandos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #070B14;
+      --surface:   #131C2E;
+      --surface2:  #0C1526;
+      --border:    #1E3A5F;
+      --gold:      #F59E0B;
+      --text:      #F1F5F9;
+      --muted:     #94A3B8;
+      --dim:       #475569;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      width: 794px;
+      min-height: 1122px;
+      margin: 0 auto;
+      padding: 0;
+      position: relative;
+      background: var(--bg);
+    }
+
+    .stripe { height: 5px; background: var(--gold); }
+
+    .content { padding: 32px 40px 52px; }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .logo-mark {
+      flex-shrink: 0;
+    }
+    .logo-text-block { line-height: 1.3; }
+    .logo-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .logo-url {
+      font-size: 11px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .logo-url:hover { text-decoration: underline; }
+
+    /* Title */
+    .title-line1 { font-size: 30px; font-weight: 700; color: var(--text); line-height: 1.15; }
+    .title-line2 { font-size: 30px; font-weight: 700; color: var(--gold);  line-height: 1.15; margin-bottom: 14px; }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      border-left: 3px solid var(--gold);
+      padding-left: 12px;
+      margin-bottom: 18px;
+    }
+
+    .divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+
+    /* Checklist items */
+    .item {
+      display: flex;
+      align-items: flex-start;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 7px;
+    }
+    .item-box {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 1.5px solid #334155;
+      border-radius: 4px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .item-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 0 10px;
+      min-width: 22px;
+      flex-shrink: 0;
+    }
+    .item-text {
+      font-size: 13px;
+      color: #E2E8F0;
+      line-height: 1.5;
+    }
+
+    /* Result */
+    .result {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      margin-bottom: 16px;
+    }
+    .result-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .result-text {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+    .cta-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .cta-text {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .cta-btn {
+      display: block;
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer a { color: var(--gold); font-size: 11px; text-decoration: none; }
+    .footer span { font-size: 11px; color: var(--dim); }
+
+    /* Print button — hidden on print */
+    .print-wrap {
+      text-align: center;
+      padding: 24px 0 0;
+      background: var(--bg);
+    }
+    .print-btn {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    @media print {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      color-adjust: exact;
+
+      body { background: var(--bg) !important; }
+      .print-wrap { display: none; }
+      .page { margin: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-wrap">
+    <button class="print-btn" onclick="window.print()">⬇ Сохранить как PDF</button>
+  </div>
+
+  <div class="page">
+    <div class="stripe"></div>
+    <div class="content">
+
+      <!-- Logo -->
+      <div class="logo">
+        <div class="logo-mark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="64.55 298.98 162.46 162.46" width="52" height="52">
+            <rect x="64.55" y="298.98" width="162.46" height="162.46" rx="14" fill="#131C2E"/>
+            <g fill="#FFFFFF">
+              <polygon points="204.86 345.79 204.86 374.47 190.8 374.47 190.8 354.07 164.97 339.2 164.97 421.28 190.8 406.39 190.8 385.89 204.86 385.89 204.86 414.64 198.73 418.18 164.92 437.65 157.95 441.66 150.91 445.72 150.91 314.7 204.86 345.79"/>
+              <path d="M140.9,314.7l-54.19,31.08v68.85s14.07,7.92,14.07,7.92l26.05,15.04,14.07,8.12v-59.84l-6.24-3.6-3.68-2.11,9.92-5.7v-59.76ZM126.83,421.31l-26.05-14.92v-20.51h11.95l14.1,8.12v27.31ZM126.83,365.4l-15.74,9.06h-10.32v-20.39l26.05-14.87v26.2Z"/>
+            </g>
+          </svg>
+        </div>
+        <div class="logo-text-block">
+          <span class="logo-name">BUSINESS COMMANDOS</span>
+          <a class="logo-url" href="https://businesscommandos.ru">businesscommandos.ru</a>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="title-line1">10 признаков бизнеса</div>
+      <div class="title-line2">на ручном управлении</div>
+
+      <p class="subtitle">Проверьте, сколько из этих признаков — про ваш бизнес:</p>
+
+      <div class="divider"></div>
+
+      <!-- Items -->
+      <div class="item"><div class="item-box"></div><span class="item-num">1.</span><span class="item-text">Без вас ничего не решается — сотрудники ждут указаний по каждому вопросу</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">2.</span><span class="item-text">Вы не можете уйти в отпуск больше чем на неделю без потерь</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">3.</span><span class="item-text">Нет чётких должностных инструкций — каждый делает «что скажут»</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">4.</span><span class="item-text">Финансы непрозрачны — вы не знаете точную чистую прибыль за прошлый месяц</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">5.</span><span class="item-text">Планёрки хаотичны или не проводятся — задачи ставятся в мессенджерах</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">6.</span><span class="item-text">CRM не заполняется или заполняется для галочки</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">7.</span><span class="item-text">Новый сотрудник входит в должность месяц и дольше — учить некому и нечем</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">8.</span><span class="item-text">Продажи зависят от одного-двух «звёздных» менеджеров</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">9.</span><span class="item-text">Маркетинг — это «давайте запустим рекламу» без плана и аналитики</span></div>
+      <div class="item"><div class="item-box"></div><span class="item-num">10.</span><span class="item-text">Вы работаете В бизнесе, а не НАД бизнесом — 80% времени на оперативку</span></div>
+
+      <div class="divider" style="margin-top:14px;"></div>
+
+      <!-- Result -->
+      <div class="result">
+        <div class="result-title">Если отмечено 5+ пунктов — ваш бизнес на ручном управлении.</div>
+        <div class="result-text">Это не приговор, но потолок роста. И его можно пробить.</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta">
+        <div class="cta-title">Узнали себя? Это можно исправить.</div>
+        <div class="cta-text">Посмотрите ваши результаты теста и запишитесь на бесплатный 30-минутный разбор с Павлом Котовым. Разберём слабые зоны и найдём точки роста.</div>
+        <a class="cta-btn" href="https://audit.businesscommandos.ru/">Откройте ваши результаты и запишитесь на разбор →</a>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <a href="https://businesscommandos.ru">businesscommandos.ru</a>
+        <span>© Business Commandos</span>
+      </div>
+
+    </div>
+    <div class="stripe"></div>
+  </div>
+
+  <script>
+    // Авто-печать при открытии в новой вкладке
+    if (window.opener) {
+      window.addEventListener('load', function() {
+        window.print();
+      });
+    }
+  </script>
+</body>
+</html>

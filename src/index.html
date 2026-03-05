@@ -10,12 +10,34 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://audit.businesscommandos.ru/">
   <meta property="og:image" content="https://audit.businesscommandos.ru/images/logos/logo-horizontal-white.png">
+  <meta name="robots" content="index, follow">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Узнайте, что тормозит ваш бизнес — за 3 минуты">
+  <meta name="twitter:description" content="Бесплатный тест на системность для собственников бизнеса. 32 вопроса, 8 зон, персональный отчёт.">
+  <meta name="twitter:image" content="https://audit.businesscommandos.ru/images/logos/logo-horizontal-white.png">
   <link rel="canonical" href="https://audit.businesscommandos.ru/">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=12">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "Тест на системность бизнеса — Колесо Баланса",
+    "description": "Бесплатный тест из 32 вопросов для собственников бизнеса. Получите персональное Колесо Баланса и узнайте слабые зоны вашей компании.",
+    "url": "https://audit.businesscommandos.ru/",
+    "author": {
+      "@type": "Organization",
+      "name": "Business Commandos",
+      "url": "https://businesscommandos.ru/"
+    },
+    "inLanguage": "ru",
+    "isAccessibleForFree": true,
+    "educationalLevel": "Профессиональный"
+  }
+  </script>
 </head>
 <body>
   <a href="#main" class="skip-link">Перейти к содержимому</a>
@@ -87,10 +109,10 @@
     </div>
 
     <div class="container quiz-nav">
-      <button type="button" class="btn btn--secondary" id="btn-quiz-back" hidden>
+      <button type="button" class="btn btn--secondary" id="btn-quiz-back" aria-label="Вернуться к предыдущему сектору" hidden>
         <span aria-hidden="true">&larr;</span> Назад
       </button>
-      <button type="button" class="btn btn--primary" id="btn-quiz-next" disabled>
+      <button type="button" class="btn btn--primary" id="btn-quiz-next" aria-label="Перейти к следующему сектору" disabled>
         Далее <span aria-hidden="true">&rarr;</span>
       </button>
     </div>
@@ -272,6 +294,9 @@
       <div class="results-share">
         <h3 class="results-share__title">Поделитесь своими результатами с коллегами</h3>
         <button type="button" class="btn btn--secondary btn--lg" id="btn-share">Поделиться результатом</button>
+        <p class="results-share__hint" id="share-hint" hidden>
+          Скопировано — вставьте <strong>Ctrl+V</strong> в Telegram или WhatsApp
+        </p>
       </div>
 
       <!-- Secondary CTA -->
@@ -284,6 +309,42 @@
 
     </div>
   </section>
+
+  <!-- PRINT-ONLY CHECKLIST (скрыт на экране, показывается при печати) -->
+  <div id="pdf-checklist" aria-hidden="true">
+    <div class="pdf-header">
+      <span class="pdf-logo-bc">BC</span>
+      <span class="pdf-logo-text">BUSINESS COMMANDOS</span>
+    </div>
+    <h1 class="pdf-title">10 признаков бизнеса<br>на ручном управлении</h1>
+    <p class="pdf-subtitle">Проверьте, сколько из этих признаков — про ваш бизнес:</p>
+    <hr class="pdf-divider">
+    <ol class="pdf-items">
+      <li>Без вас ничего не решается — сотрудники ждут указаний по каждому вопросу</li>
+      <li>Вы не можете уйти в отпуск больше чем на неделю без потерь</li>
+      <li>Нет чётких должностных инструкций — каждый делает «что скажут»</li>
+      <li>Финансы непрозрачны — вы не знаете точную чистую прибыль за прошлый месяц</li>
+      <li>Планёрки хаотичны или не проводятся — задачи ставятся в мессенджерах</li>
+      <li>CRM не заполняется или заполняется для галочки</li>
+      <li>Новый сотрудник входит в должность месяц и дольше — учить некому и нечем</li>
+      <li>Продажи зависят от одного-двух «звёздных» менеджеров</li>
+      <li>Маркетинг — это «давайте запустим рекламу» без плана и аналитики</li>
+      <li>Вы работаете В бизнесе, а не НАД бизнесом — 80% времени на оперативку</li>
+    </ol>
+    <div class="pdf-alert">
+      <strong>Если отмечено 5+ пунктов — ваш бизнес на ручном управлении.</strong><br>
+      Это не приговор, но потолок роста. И его можно пробить.
+    </div>
+    <div class="pdf-cta">
+      <p class="pdf-cta__title">Узнали себя? Это можно исправить.</p>
+      <p class="pdf-cta__text">Запишитесь на бесплатный 30-минутный разбор с Павлом Котовым — разберём слабые зоны и найдём точки роста.</p>
+      <p class="pdf-cta__url">audit.businesscommandos.ru</p>
+    </div>
+    <div class="pdf-footer">
+      <span>businesscommandos.ru</span>
+      <span>© Business Commandos</span>
+    </div>
+  </div>
 
   <!-- Yandex.Metrika counter -->
   <script>
@@ -301,7 +362,6 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/105930063" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script defer src="js/main.js"></script>
 </body>
 </html>
