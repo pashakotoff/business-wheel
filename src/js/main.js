@@ -480,6 +480,28 @@ function drawRadarChart(svgId, values, labels, cx, cy, animate) {
     html += `<text x="${lx}" y="${ly + 14}" text-anchor="${anchor}" dominant-baseline="central" fill="#94A3B8" font-family="Inter, sans-serif" font-size="11">${values[i].toFixed(1)}</text>`;
   }
 
+  // Compute tight viewBox so labels never overflow on small screens
+  let vbMinX = cx - maxRadius, vbMaxX = cx + maxRadius;
+  let vbMinY = cy - maxRadius, vbMaxY = cy + maxRadius;
+  for (let i = 0; i < numAxes; i++) {
+    const angle = startAngle + i * angleStep;
+    const lr = maxRadius + 28;
+    const lx = cx + lr * Math.cos(angle);
+    const ly = cy + lr * Math.sin(angle);
+    const cosA = Math.cos(angle);
+    const estW = labels[i].length * 7.5; // ~7.5px per char at Inter font-size 12
+    let lLeft, lRight;
+    if (cosA > 0.1)       { lLeft = lx;          lRight = lx + estW; }
+    else if (cosA < -0.1) { lLeft = lx - estW;   lRight = lx; }
+    else                  { lLeft = lx - estW / 2; lRight = lx + estW / 2; }
+    vbMinX = Math.min(vbMinX, lLeft);
+    vbMaxX = Math.max(vbMaxX, lRight);
+    vbMinY = Math.min(vbMinY, ly - 8);   // 8 ≈ half label font-size
+    vbMaxY = Math.max(vbMaxY, ly + 22);  // 14 score offset + 8 half score height
+  }
+  const vbPad = 8;
+  svg.setAttribute('viewBox', `${Math.floor(vbMinX - vbPad)} ${Math.floor(vbMinY - vbPad)} ${Math.ceil(vbMaxX - vbMinX + vbPad * 2)} ${Math.ceil(vbMaxY - vbMinY + vbPad * 2)}`);
+
   svg.innerHTML = html;
 }
 
