@@ -36,17 +36,19 @@
 
     .page {
       width: 794px;
-      height: 1122px;
+      min-height: 1122px;
       margin: 0 auto;
       padding: 0;
       position: relative;
       background: var(--bg);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .stripe { height: 5px; background: var(--gold); }
+    .stripe { height: 5px; background: var(--gold); flex-shrink: 0; }
 
-    .content { padding: 22px 36px 22px; }
+    .content { padding: 22px 36px 22px; flex: 1; }
 
     /* Logo */
     .logo {
@@ -204,9 +206,16 @@
     @page { size: A4; margin: 0; }
 
     @media print {
-      body { background: #070B14 !important; }
-      .page { background: #070B14 !important; margin: 0; width: 100%; }
-      .content { background: #070B14 !important; }
+      body { background: #070B14 !important; margin: 0; }
+      .page {
+        background: #070B14 !important;
+        margin: 0; width: 100%;
+        height: 297mm !important;
+        display: grid !important;
+        grid-template-rows: 5px 1fr 5px !important;
+      }
+      .content { background: #070B14 !important; overflow: hidden; display: flex; flex-direction: column; }
+      .footer { margin-top: auto; }
       .stripe { background: #F59E0B !important; }
       .item { background: #0C1526 !important; border-color: #1E3A5F !important; }
       .result { background: #131C2E !important; border-color: #1E3A5F !important; }
