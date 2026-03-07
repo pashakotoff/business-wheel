@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест на системность бизнеса — Колесо Баланса v2 | Business Commandos</title>
+  <meta name="description" content="Пройдите бесплатный тест из 32 вопросов и получите персональное Колесо Баланса Бизнеса. Узнайте, что тормозит рост вашей компании. Занимает 3 минуты.">
+  <meta property="og:title" content="Узнайте, что тормозит ваш бизнес — за 3 минуты">
+  <meta property="og:description" content="Бесплатный тест на системность для собственников бизнеса. 32 вопроса, 8 зон, персональный отчёт.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://audit.businesscommandos.ru/">
+  <meta property="og:image" content="https://audit.businesscommandos.ru/images/logos/logo-horizontal-white.png">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://audit.businesscommandos.ru/">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Base design tokens first, then v2 layout on top -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-v2.css">
+</head>
+<body>
+  <a href="#v2-main" class="skip-link">Перейти к содержимому</a>
+
+  <!-- ================================================================
+       ARIA live region for wheel updates
+       ================================================================ -->
+  <div id="v2-wheel-live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ================================================================
+       VIEW: LANDING
+       ================================================================ -->
+  <div id="v2-view-landing" class="v2-view split-screen" hidden>
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left">
+      <div class="v2-landing-left">
+
+        <header class="v2-header" role="banner">
+          <div class="v2-header__logo" role="img" aria-label="Business Commandos"></div>
+          <span class="v2-header__counter">Тест прошли <strong>1&nbsp;200+</strong> предпринимателей</span>
+        </header>
+
+        <main id="v2-main" class="v2-landing-hero">
+          <span class="v2-badge">Бесплатный тест &middot; 3 минуты</span>
+
+          <h1 class="v2-landing-title">Насколько ваш бизнес работает без&nbsp;вас?</h1>
+
+          <p class="v2-landing-subtitle">
+            За 3 минуты выявим слабые зоны, из-за которых вы застряли в операционке. 32 вопроса, 8 зон системы управления.
+          </p>
+
+          <button type="button" class="btn btn--primary btn--lg v2-cta-btn" id="v2-btn-start" aria-label="Начать бесплатный тест на системность бизнеса">
+            Пройти тест бесплатно &rarr;
+          </button>
+
+          <p class="v2-landing-note">32 вопроса &middot; Результат сразу &middot; Без регистрации для старта</p>
+        </main>
+
+        <footer class="v2-landing-trust" role="contentinfo">
+          <div class="v2-trust-stats">
+            <div class="v2-trust-stat">
+              <span class="v2-trust-stat__number">7+</span>
+              <span class="v2-trust-stat__label">лет опыта</span>
+            </div>
+            <div class="v2-trust-stat">
+              <span class="v2-trust-stat__number">50+</span>
+              <span class="v2-trust-stat__label">компаний</span>
+            </div>
+            <div class="v2-trust-stat">
+              <span class="v2-trust-stat__number">80%</span>
+              <span class="v2-trust-stat__label">возвращаются</span>
+            </div>
+          </div>
+          <div class="v2-trust-author">
+            <div class="v2-trust-author__photo">
+              <img src="images/pavel-kotov.jpg" alt="Павел Котов — основатель Business Commandos" width="44" height="44" loading="lazy">
+            </div>
+            <p class="v2-trust-author__text">
+              <strong>Павел Котов</strong> — основатель Business Commandos. 7+ лет внедряет системы управления в бизнесах с оборотом от 30 до 500 млн рублей.
+            </p>
+          </div>
+        </footer>
+
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANEL -->
+    <aside class="panel-right" aria-label="Пример колеса баланса бизнеса">
+      <div class="v2-landing-right">
+
+        <p class="v2-wheel-title">Колесо баланса бизнеса</p>
+
+        <div class="v2-demo-wheel-wrap">
+          <svg id="v2-demo-wheel" viewBox="0 0 400 320" width="320" height="280"
+               role="img" aria-label="Пример заполненного колеса баланса бизнеса — демонстрация"></svg>
+        </div>
+
+        <div class="v2-legend" aria-label="Легенда цветов">
+          <span class="v2-legend__item">
+            <span class="v2-legend__dot v2-legend__dot--danger" aria-hidden="true"></span>
+            Слабо (1–4)
+          </span>
+          <span class="v2-legend__item">
+            <span class="v2-legend__dot v2-legend__dot--warning" aria-hidden="true"></span>
+            Риск (5–7)
+          </span>
+          <span class="v2-legend__item">
+            <span class="v2-legend__dot v2-legend__dot--success" aria-hidden="true"></span>
+            Сильно (8–10)
+          </span>
+        </div>
+
+        <blockquote class="v2-quote">
+          <p class="v2-quote__text">«Нашёл 3 слабых места за 10 минут. Теперь знаю, с чего начинать системную работу»</p>
+          <footer class="v2-quote__author">— Андрей М., владелец производства</footer>
+        </blockquote>
+
+        <div class="v2-counter" aria-label="Количество прошедших тест">
+          1&nbsp;247
+          <span class="v2-counter__sub">предпринимателей уже прошли</span>
+        </div>
+
+      </div>
+    </aside><!-- /panel-right -->
+
+  </div><!-- /v2-view-landing -->
+
+
+  <!-- ================================================================
+       VIEW: QUIZ
+       ================================================================ -->
+  <div id="v2-view-quiz" class="v2-view split-screen" hidden>
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left">
+      <div class="v2-quiz-left">
+
+        <!-- Sticky header -->
+        <div class="v2-quiz-header" role="banner">
+          <div class="v2-quiz-header__top">
+            <div class="v2-quiz-header__logo" role="img" aria-label="Business Commandos"></div>
+            <span class="v2-quiz-header__sector" id="v2-progress-sector" aria-live="polite">
+              <strong>Продажи</strong> &middot; Сектор 1 из 8
+            </span>
+          </div>
+          <div class="v2-progress-track" id="v2-progress-bar"
+               role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1"
+               aria-label="Прогресс прохождения теста">
+            <div class="v2-progress-fill" id="v2-progress-fill" style="width: 12.5%"></div>
+          </div>
+        </div>
+
+        <!-- Question content -->
+        <main id="v2-main-quiz" class="v2-quiz-content">
+
+          <!-- Sector done notification (inline, fades out) -->
+          <div class="v2-sector-done" id="v2-sector-done-notif" aria-live="polite" role="status">
+            <span class="v2-sector-done__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </span>
+            <span class="v2-sector-done__text" id="v2-sector-done-text"></span>
+          </div>
+
+          <!-- Question block (updated by JS) -->
+          <div id="v2-question-block">
+            <!-- Injected by renderQuizLeft() -->
+          </div>
+
+        </main>
+
+        <!-- Navigation -->
+        <nav class="v2-quiz-nav" aria-label="Навигация по квизу">
+          <button type="button" class="btn btn--secondary" id="v2-btn-back"
+                  aria-label="Вернуться к предыдущему сектору" hidden>
+            <span aria-hidden="true">&larr;</span> Назад
+          </button>
+          <button type="button" class="btn btn--primary" id="v2-btn-next"
+                  aria-label="Перейти к следующему сектору" disabled>
+            Далее <span aria-hidden="true">&rarr;</span>
+          </button>
+        </nav>
+
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANEL -->
+    <aside class="panel-right" aria-label="Информация о текущем секторе">
+      <div class="v2-quiz-right">
+
+        <!-- Zone A: Sector description -->
+        <section class="v2-sector-info" aria-labelledby="v2-sector-info-name">
+
+          <!-- Mobile: accordion toggle -->
+          <button class="v2-sector-accordion btn" type="button"
+                  aria-controls="v2-sector-info-body" aria-expanded="false">
+            Подробнее о секторе
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+
+          <div id="v2-sector-info-body" class="v2-sector-info__body">
+            <div class="v2-sector-info__header">
+              <span class="v2-sector-info__icon" id="v2-sector-info-icon" aria-hidden="true"></span>
+              <h2 class="v2-sector-info__name" id="v2-sector-info-name">Продажи</h2>
+            </div>
+            <div class="v2-sector-info__divider" aria-hidden="true"></div>
+            <p class="v2-sector-info__label">Что измеряется</p>
+            <p class="v2-sector-info__desc" id="v2-sector-desc-text"></p>
+            <p class="v2-sector-info__why-label">Почему важно</p>
+            <p class="v2-sector-info__why" id="v2-sector-why-text"></p>
+          </div>
+        </section>
+
+        <!-- Zone B: Live wheel -->
+        <section class="v2-live-wheel-zone" aria-label="Ваше строящееся колесо баланса">
+          <p class="v2-live-wheel-title" aria-hidden="true">Ваше колесо строится</p>
+          <div class="v2-live-wheel-wrap">
+            <svg id="v2-live-wheel"
+                 viewBox="0 0 200 200"
+                 width="200" height="200"
+                 role="img"
+                 aria-label="Строящееся колесо баланса — прогресс прохождения теста"></svg>
+          </div>
+          <p class="v2-live-wheel-caption" id="v2-live-wheel-caption" aria-live="polite">Заполнено 0 из 8 секторов</p>
+        </section>
+
+        <!-- Zone C: Motivation -->
+        <div class="v2-motivation" role="status" aria-live="polite">
+          <p class="v2-motivation__text" id="v2-motivation-text">Начало положено. 7 секторов ещё покажут полную картину.</p>
+        </div>
+
+      </div>
+    </aside><!-- /panel-right -->
+
+  </div><!-- /v2-view-quiz -->
+
+
+  <!-- ================================================================
+       VIEW: BUSINESS TYPE CHOICE
+       ================================================================ -->
+  <div id="v2-view-choice" class="v2-view split-screen" hidden>
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left">
+      <div class="v2-choice-left">
+
+        <header class="v2-header" role="banner">
+          <div class="v2-quiz-header__logo" role="img" aria-label="Business Commandos"></div>
+          <span class="v2-header__counter">Сектор 7 из 8</span>
+        </header>
+
+        <main id="v2-main-choice" class="v2-choice-content">
+          <h2 class="v2-choice-title">Уточните тип вашего бизнеса</h2>
+          <p class="v2-choice-subtitle">Следующий блок вопросов подстроится под вашу специфику.</p>
+
+          <div class="v2-choice-cards" role="group" aria-label="Тип бизнеса">
+
+            <button type="button" class="v2-choice-card" data-type="goods"
+                    aria-label="Мы производим товары — производство, торговля, склад, физический продукт">
+              <span class="v2-choice-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </span>
+              <span class="v2-choice-card__title">Товары</span>
+              <span class="v2-choice-card__desc">Производство, торговля, склад, физический продукт</span>
+            </button>
+
+            <button type="button" class="v2-choice-card" data-type="services"
+                    aria-label="Мы оказываем услуги — консалтинг, агентства, обучение, сервис">
+              <span class="v2-choice-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </span>
+              <span class="v2-choice-card__title">Услуги</span>
+              <span class="v2-choice-card__desc">Консалтинг, агентства, обучение, сервис</span>
+            </button>
+
+          </div>
+
+          <p class="v2-choice-note">Если у вас и товары и услуги — выберите основной источник выручки.</p>
+        </main>
+
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANEL -->
+    <aside class="panel-right" aria-label="Пояснение к выбору типа бизнеса">
+      <div class="v2-choice-right">
+
+        <div class="v2-choice-why">
+          <h3 class="v2-choice-why__title">Зачем нам это знать?</h3>
+          <p class="v2-choice-why__desc">
+            Вопросы для производственных компаний и для сервисного бизнеса различаются. Один вариант — 4 вопроса, но под вашу реальность.
+          </p>
+        </div>
+
+        <section class="v2-live-wheel-zone" aria-label="Ваше колесо — 6 из 8 секторов заполнено">
+          <p class="v2-live-wheel-title" aria-hidden="true">Прогресс</p>
+          <div class="v2-live-wheel-wrap">
+            <svg id="v2-choice-wheel"
+                 viewBox="0 0 200 200"
+                 width="200" height="200"
+                 role="img"
+                 aria-label="Колесо с 6 заполненными секторами"></svg>
+          </div>
+          <p class="v2-live-wheel-caption" id="v2-choice-wheel-caption" aria-live="polite">Заполнено 6 из 8 секторов</p>
+        </section>
+
+        <p class="v2-choice-hint">Осталось 2 сектора до результата</p>
+
+      </div>
+    </aside><!-- /panel-right -->
+
+  </div><!-- /v2-view-choice -->
+
+
+  <!-- ================================================================
+       VIEW: CONTACT FORM
+       ================================================================ -->
+  <div id="v2-view-contact" class="v2-view split-screen" hidden>
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left">
+      <div class="v2-contact-left">
+
+        <header class="v2-header" role="banner">
+          <div class="v2-quiz-header__logo" role="img" aria-label="Business Commandos"></div>
+          <span class="v2-header__counter">Последний шаг</span>
+        </header>
+
+        <main id="v2-main-contact" class="v2-contact-content">
+          <h2 class="v2-contact-title">Ваше колесо баланса готово</h2>
+          <p class="v2-contact-subtitle">Введите контакты — и мы покажем полный результат с расшифровкой слабых зон и рекомендациями.</p>
+
+          <form id="v2-contact-form" class="v2-contact-form" novalidate aria-label="Форма для получения результатов теста">
+
+            <div class="form-group">
+              <label for="v2-field-name" class="form-label">Ваше имя</label>
+              <input type="text" id="v2-field-name" class="form-input"
+                     placeholder="Александр" autocomplete="given-name" required
+                     aria-required="true" aria-describedby="v2-error-name">
+              <span class="form-error" id="v2-error-name" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="v2-field-phone" class="form-label">Номер телефона</label>
+              <input type="tel" id="v2-field-phone" class="form-input"
+                     placeholder="+7 (___) ___-__-__" autocomplete="tel" required
+                     aria-required="true" aria-describedby="v2-hint-phone v2-error-phone">
+              <span class="form-hint" id="v2-hint-phone">Для связи по результатам</span>
+              <span class="form-error" id="v2-error-phone" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="v2-field-email" class="form-label">Электронная почта</label>
+              <input type="email" id="v2-field-email" class="form-input"
+                     placeholder="example@mail.ru" autocomplete="email" required
+                     aria-required="true" aria-describedby="v2-error-email">
+              <span class="form-error" id="v2-error-email" role="alert"></span>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--full">
+              Показать мой результат
+            </button>
+            <p class="contact__privacy">Мы не спамим. Вы получите только результаты теста и одно письмо с разбором вашей ситуации.</p>
+
+          </form>
+        </main>
+
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANEL -->
+    <aside class="panel-right" aria-label="Предварительный просмотр результатов">
+      <div class="v2-contact-right">
+
+        <div class="v2-blurred-wheel-wrap" aria-hidden="true">
+          <svg id="v2-blurred-wheel"
+               viewBox="0 0 260 220"
+               width="240" height="200"></svg>
+        </div>
+
+        <h3 class="v2-contact-what-title">Вы уже в одном шаге от результата</h3>
+
+        <ul class="v2-what-list" aria-label="Что вы получите">
+          <li class="v2-what-item">
+            <span class="v2-what-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Колесо Баланса с вашими оценками
+          </li>
+          <li class="v2-what-item">
+            <span class="v2-what-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Индекс системности (0–80)
+          </li>
+          <li class="v2-what-item">
+            <span class="v2-what-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Разбор 2 самых слабых зон
+          </li>
+          <li class="v2-what-item">
+            <span class="v2-what-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Конкретный следующий шаг
+          </li>
+        </ul>
+
+        <p class="v2-contact-guarantee">Без спама. Данные используются только для отправки результата.</p>
+
+      </div>
+    </aside><!-- /panel-right -->
+
+  </div><!-- /v2-view-contact -->
+
+
+  <!-- ================================================================
+       VIEW: RESULTS
+       ================================================================ -->
+  <div id="v2-view-results" class="v2-view split-screen" hidden>
+
+    <!-- LEFT PANEL -->
+    <div class="panel-left">
+      <div class="v2-results-left">
+
+        <header class="v2-header" role="banner">
+          <div class="v2-quiz-header__logo" role="img" aria-label="Business Commandos"></div>
+          <span class="v2-header__counter">Ваш результат</span>
+        </header>
+
+        <main id="v2-main-results" class="v2-results-content">
+
+          <!-- Score block -->
+          <p class="v2-score-label">Ваш индекс системности</p>
+          <div class="v2-score-value" aria-live="polite">
+            <span class="v2-score-number" id="v2-result-score">0</span>
+            <span class="v2-score-max">из 80</span>
+          </div>
+          <div class="v2-score-percent" id="v2-result-percent" aria-live="polite">0%</div>
+
+          <!-- Status -->
+          <div class="v2-status-box">
+            <h2 class="v2-status-title" id="v2-status-title" tabindex="-1"></h2>
+            <p class="v2-status-desc" id="v2-status-desc"></p>
+          </div>
+
+          <!-- CTA Diagnostic -->
+          <section class="v2-results-cta" aria-labelledby="v2-cta-title">
+            <h3 class="v2-results-cta__title" id="v2-cta-title">Хотите разобрать слабые зоны с Павлом лично?</h3>
+            <p class="v2-results-cta__desc">Запишитесь на бесплатную диагностическую сессию — 30 минут в Zoom.</p>
+
+            <div id="v2-diagnostic-form" class="v2-diagnostic-form">
+              <div class="form-group">
+                <label class="form-label" for="v2-diag-phone">Ваш телефон</label>
+                <input type="tel" id="v2-diag-phone" class="form-input"
+                       placeholder="+7 (___) ___-__-__" autocomplete="tel"
+                       aria-label="Введите телефон для записи на диагностику">
+                <span class="form-hint">Проверьте номер — мы позвоним или напишем сюда</span>
+              </div>
+
+              <div class="v2-methods-label">
+                Как удобнее связаться?
+                <span class="v2-methods-optional">(необязательно)</span>
+              </div>
+              <div class="v2-methods" role="group" aria-label="Способ связи">
+                <button type="button" class="btn--method" data-method="telegram" aria-label="Telegram">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                  TG
+                </button>
+                <button type="button" class="btn--method" data-method="whatsapp" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                  WA
+                </button>
+                <button type="button" class="btn--method" data-method="phone" aria-label="Звонок">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Звонок
+                </button>
+              </div>
+
+              <button type="button" class="btn btn--accent btn--lg btn--full" id="v2-btn-diagnostic">
+                Записаться на бесплатный разбор
+              </button>
+            </div>
+
+            <div id="v2-diagnostic-success" class="v2-diagnostic-success" hidden>
+              <div class="v2-diagnostic-success__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <p class="v2-diagnostic-success__text" role="status">Заявка отправлена!</p>
+              <p class="v2-diagnostic-success__sub">Мой ассистент свяжется с вами в ближайшее время и организует встречу.</p>
+            </div>
+
+            <p style="font-size: var(--font-size-micro); color: var(--color-text-muted); margin-top: 12px; text-align: center;">
+              Без продаж «в лоб». Вы получите конкретные рекомендации — даже если не станете клиентом.
+            </p>
+          </section>
+
+          <!-- Secondary CTA -->
+          <section class="v2-results-secondary" aria-label="Дополнительные действия">
+            <div class="v2-results-share">
+              <button type="button" class="btn btn--secondary" id="v2-btn-share">
+                Поделиться результатом
+              </button>
+              <p class="v2-share-hint" id="v2-share-hint" hidden role="status">
+                Скопировано — вставьте <strong>Ctrl+V</strong> в Telegram или WhatsApp
+              </p>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </div><!-- /panel-left -->
+
+    <!-- RIGHT PANEL -->
+    <aside class="panel-right" aria-label="Детальные результаты — колесо и разбор слабых зон">
+      <div class="v2-results-right">
+
+        <!-- Full colored wheel -->
+        <section aria-label="Колесо баланса бизнеса — ваш результат">
+          <div class="v2-results-wheel-wrap">
+            <svg id="v2-result-wheel"
+                 viewBox="0 0 380 310"
+                 width="100%"
+                 style="max-width: 380px;"
+                 role="img"
+                 aria-label="Ваше персональное колесо баланса бизнеса"></svg>
+          </div>
+
+          <!-- Color legend bar -->
+          <div class="v2-legend-bar" aria-hidden="true">
+            <div class="v2-legend-bar__segment v2-legend-bar__segment--danger" style="flex: 4;"></div>
+            <div class="v2-legend-bar__segment v2-legend-bar__segment--warning" style="flex: 3;"></div>
+            <div class="v2-legend-bar__segment v2-legend-bar__segment--success" style="flex: 3;"></div>
+          </div>
+          <div class="v2-legend-bar-labels" aria-hidden="true">
+            <span>1 — хаос</span>
+            <span>5 — риск</span>
+            <span>8 — система</span>
+            <span>10</span>
+          </div>
+        </section>
+
+        <!-- Scores table -->
+        <section aria-label="Оценки по всем 8 секторам">
+          <div id="v2-scores-table" class="v2-scores-table" role="list" aria-label="Список секторов с оценками">
+            <!-- Injected by renderScoresTable() -->
+          </div>
+        </section>
+
+        <!-- Weak zones breakdown -->
+        <section aria-labelledby="v2-weak-zones-title">
+          <h3 class="v2-weak-title" id="v2-weak-zones-title">Слабые зоны — разбор</h3>
+          <div id="v2-weak-cards">
+            <!-- Injected by renderWeakZones() -->
+          </div>
+        </section>
+
+        <div class="v2-results-right-cta">
+          <button type="button" class="btn btn--accent btn--lg btn--full"
+                  onclick="document.getElementById('v2-btn-diagnostic').scrollIntoView({behavior:'smooth'})"
+                  aria-label="Перейти к записи на диагностическую сессию">
+            Разобрать слабые зоны с экспертом
+          </button>
+        </div>
+
+      </div>
+    </aside><!-- /panel-right -->
+
+  </div><!-- /v2-view-results -->
+
+
+  <script defer src="js/main-v2.js"></script>
+</body>
+</html>
