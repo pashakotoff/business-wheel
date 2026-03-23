@@ -1519,9 +1519,11 @@ h4 {
   }
 
   .pdf-cta__url {
+    display: inline-block;
     font-size: 12px;
     font-weight: 700;
     color: #F59E0B;
+    text-decoration: none;
   }
 
   .pdf-footer {
