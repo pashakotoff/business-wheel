@@ -297,6 +297,9 @@ h4 {
 
 .btn--full {
   width: 100%;
+  display: flex;
+  min-width: 0;
+  white-space: normal;
 }
 
 .btn--link {
